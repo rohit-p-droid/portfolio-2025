@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { heroContent } from "./heroData";
 import { Typewriter } from "react-simple-typewriter";
+import { RESUME_LINK } from "../../config/config";
 
 const Hero = () => {
   return (
@@ -51,7 +52,7 @@ const Hero = () => {
               View Projects
             </a>
             <a
-              href={heroContent.resumeLink}
+              href={RESUME_LINK}
               download
               className="px-6 py-3 rounded-full border border-blue-700 text-blue-700 dark:border-blue-400 dark:text-blue-400 hover:bg-gradient-to-r hover:from-blue-700 hover:to-blue-800 hover:text-white dark:hover:from-blue-400 dark:hover:to-blue-500 dark:hover:text-black transition-all duration-300"
             >

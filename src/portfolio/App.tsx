@@ -6,7 +6,7 @@ import ScrollToTop from '../components/ScrollToTop';
 import { ThemeButton, ScrollToTopButton, FloatingMenu } from './components';
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");

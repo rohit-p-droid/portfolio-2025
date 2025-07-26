@@ -1,24 +1,26 @@
 import { Hero } from "../../sections";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
 import {
   FaProjectDiagram,
   FaBlog,
 } from "react-icons/fa";
+import { PROJECTS_LINK, BLOG_LINK } from "../../config/config";
 
 const cards = [
   {
     title: "My Work",
     description: "Explore a collection of my projects, showcasing my skills in creating modern, scalable web applications.",
     icon: <FaProjectDiagram />,
-    link: "/projects",
+    link: PROJECTS_LINK,
     cta: "View Projects",
   },
   {
     title: "My Blog",
     description: "I write about web development, system design, and the latest technologies I'm excited about.",
     icon: <FaBlog />,
-    link: "/blog",
+    link: BLOG_LINK,
     cta: "Read Blog",
   },
 ];

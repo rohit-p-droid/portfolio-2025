@@ -8,6 +8,7 @@ const Projects = lazy(() => import('../pages/projects/Projects'));
 const Certifications = lazy(() => import('../pages/certifications/Certifications'));
 const Experience = lazy(() => import('../pages/experience/Experience'));
 const Blog = lazy(() => import('../pages/blog/Blog'));
+const BlogOverview = lazy(() => import('../pages/blog/BlogOverview'));
 const Contact = lazy(() => import('../pages/contact/Contact'));
 
 const PortfolioLoading = () => (
@@ -83,6 +84,14 @@ export const portfolioRoutes = {
             element: (
                 <LazyComponent>
                     <Blog />
+                </LazyComponent>
+            )
+        },
+        {
+            path: "blog/:slug",
+            element: (
+                <LazyComponent>
+                    <BlogOverview/>
                 </LazyComponent>
             )
         },

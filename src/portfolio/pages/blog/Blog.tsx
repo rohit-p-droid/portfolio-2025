@@ -1,7 +1,14 @@
-
+import { Blog as BlogSection } from "../../sections"
+import BlogOverview from "./BlogOverview"
 const Blog = () => {
   return (
-    <div>Blog</div>
+    <div>
+      <BlogSection/>
+
+      {/* <BlogOverview/> */}
+
+
+    </div>
   )
 }
 

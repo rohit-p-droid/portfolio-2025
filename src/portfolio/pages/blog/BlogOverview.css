@@ -1,0 +1,106 @@
+/* Blog content styles for HTML rendering */
+.blog-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem 0;
+  color: inherit;
+}
+
+.blog-content h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem 0;
+  color: inherit;
+}
+
+.blog-content h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem 0;
+  color: inherit;
+}
+
+.blog-content h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem 0;
+  color: inherit;
+}
+
+.blog-content p {
+  margin: 1rem 0;
+  line-height: 1.7;
+  color: inherit;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  color: inherit;
+}
+
+.blog-content li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.blog-content strong {
+  font-weight: 600;
+  color: inherit;
+}
+
+.blog-content code {
+  background-color: rgb(243 244 246);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.875em;
+}
+
+.dark .blog-content code {
+  background-color: rgb(55 65 81);
+}
+
+.blog-content pre {
+  background-color: rgb(243 244 246);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.dark .blog-content pre {
+  background-color: rgb(55 65 81);
+}
+
+.blog-content pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.blog-content blockquote {
+  border-left: 4px solid rgb(59 130 246);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: rgb(107 114 128);
+}
+
+.dark .blog-content blockquote {
+  color: rgb(156 163 175);
+}
+
+.blog-content a {
+  color: rgb(59 130 246);
+  text-decoration: underline;
+}
+
+.blog-content a:hover {
+  color: rgb(29 78 216);
+}
+
+.dark .blog-content a:hover {
+  color: rgb(96 165 250);
+}

@@ -1,7 +1,11 @@
+import { Contact as ContactSection } from "../../sections"
+
 
 const Contact = () => {
   return (
-    <div>Contact</div>
+    <div>
+      <ContactSection/>
+    </div>
   )
 }
 

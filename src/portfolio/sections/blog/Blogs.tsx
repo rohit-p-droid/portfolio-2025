@@ -1,6 +1,7 @@
 import { blogPosts } from "./blogData";
 import { motion } from "framer-motion";
 import { FaPenNib } from "react-icons/fa";
+import { BLOG_LINK } from "../../config/config";
 
 const Blog = () => {
   return (
@@ -15,7 +16,7 @@ const Blog = () => {
           transition={{ duration: 0.6 }}
           className="text-4xl font-bold text-blue-700 dark:text-blue-400 flex items-center justify-center gap-3"
         >
-          <FaPenNib className="text-blue-500 dark:text-blue-300 text-2xl" /> Blog Preview
+          <FaPenNib className="text-blue-500 dark:text-blue-300 text-2xl" /> Blogs
         </motion.h2>
 
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
@@ -50,7 +51,7 @@ const Blog = () => {
                 </div>
 
                 <a
-                  href={post.url}
+                  href={`${BLOG_LINK}/${post.slug}`}
                   target="_blank"
                   className="mt-5 inline-block text-sm px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-medium hover:scale-105 transition-transform"
                 >
@@ -60,14 +61,6 @@ const Blog = () => {
             </motion.div>
           ))}
         </div>
-
-        <a
-          href="https://yourblog.com"
-          target="_blank"
-          className="inline-block mt-10 text-sm px-6 py-3 rounded-full border border-blue-500 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900 transition"
-        >
-          View All Blogs
-        </a>
       </div>
     </section>
   );

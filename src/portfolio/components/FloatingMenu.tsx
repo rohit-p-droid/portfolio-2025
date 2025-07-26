@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect, useRef } from "react";
 import {
+    HOME_LINK,
+    ABOUT_LINK,
+    SKILLS_LINK,
+    PROJECTS_LINK,
+    CERTIFICATIONS_LINK,
+    EXPERIENCE_LINK,
+    BLOG_LINK,
+    CONTACT_LINK
+} from "../config/config";
+import {
     FaBars,
     FaTimes,
     FaUser,
@@ -18,14 +28,14 @@ const FloatingMenu: React.FC = () => {
     const menuRef = useRef<HTMLDivElement>(null);
 
     const menuItems = [
-        { to: "/", icon: <FaHome />, label: "Home" },
-        { to: "/about", icon: <FaUser />, label: "About" },
-        { to: "/skills", icon: <FaTools />, label: "Skills" },
-        { to: "/projects", icon: <FaProjectDiagram />, label: "Projects" },
-        { to: "/certifications", icon: <FaCertificate />, label: "Certifications" },
-        { to: "/experience", icon: <FaBriefcase />, label: "Experience" },
-        { to: "/blog", icon: <FaBlog />, label: "Blog" },
-        { to: "/contact", icon: <FaEnvelope />, label: "Contact" }
+        { to: HOME_LINK, icon: <FaHome />, label: "Home" },
+        { to: ABOUT_LINK, icon: <FaUser />, label: "About" },
+        { to: SKILLS_LINK, icon: <FaTools />, label: "Skills" },
+        { to: PROJECTS_LINK, icon: <FaProjectDiagram />, label: "Projects" },
+        { to: CERTIFICATIONS_LINK, icon: <FaCertificate />, label: "Certifications" },
+        { to: EXPERIENCE_LINK, icon: <FaBriefcase />, label: "Experience" },
+        { to: BLOG_LINK, icon: <FaBlog />, label: "Blog" },
+        { to: CONTACT_LINK, icon: <FaEnvelope />, label: "Contact" }
     ];
 
     const toggleMenu = () => {
