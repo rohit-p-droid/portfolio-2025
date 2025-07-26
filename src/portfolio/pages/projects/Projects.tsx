@@ -1,9 +1,8 @@
-
-import { Projects as ProjectSection } from "../../sections"
-import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
-import { FaTools, FaEnvelope, FaArrowRight } from "react-icons/fa"
-import { SKILLS_LINK, BLOG_LINK } from "../../config/config"
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Projects as ProjectSection } from "../../sections";
+import { SKILLS_LINK, BLOG_LINK } from "../../config/config";
+import { FaTools, FaEnvelope, FaArrowRight } from "react-icons/fa";
 
 const quickLinks = [
   {

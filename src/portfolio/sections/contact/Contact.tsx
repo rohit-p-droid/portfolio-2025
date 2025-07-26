@@ -1,21 +1,11 @@
-import { motion } from "framer-motion";
-import { FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane, FaSpinner } from "react-icons/fa";
-import { EMAIL_LINK, LINKEDIN_LINK, GITHUB_LINK, EMAIL } from "../../config/config";
 import { useState } from "react";
-
-interface FormData {
-  name: string;
-  email: string;
-  message: string;
-}
-
-interface ApiResponse {
-  success: boolean;
-  message: string;
-}
+import { motion } from "framer-motion";
+import { EMAIL_LINK, LINKEDIN_LINK, GITHUB_LINK, EMAIL } from "../../config/config";
+import { sendContactMessage, type ContactFormData } from "../../services/contact.service";
+import { FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane, FaSpinner } from "react-icons/fa";
 
 const Contact = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     message: ''
@@ -32,41 +22,23 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      // Replace this URL with your actual API endpoint
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(formData),
-      // });
-
-      // const result: ApiResponse = await response.json();
-
-      // if (response.ok && result.success) {
-      //   setShowSuccess(true);
-      //   setFormData({ name: '', email: '', message: '' });
-        
-      //   // Hide success message after 5 seconds
-      //   setTimeout(() => setShowSuccess(false), 5000);
-      // } else {
-      //   throw new Error(result.message || 'Failed to send message');
-      // }
-      setShowSuccess(true);
-      setTimeout(() => {
-        setShowSuccess(false) 
-        setIsLoading(false)}, 5000);
-    } catch (error) {
-      console.error('Error sending message:', error);
-      alert('Failed to send message. Please try again or contact me directly via email.');
-    } finally {
-      // setIsLoading(false);
-    }
+    sendContactMessage(formData)
+      .then(() => {
+        setShowSuccess(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setShowSuccess(false), 5000);
+      })
+      .catch(error => {
+        console.error('Error sending message:', error);
+        alert('Failed to send message. Please try again or contact me directly via email.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
   return (
     <section

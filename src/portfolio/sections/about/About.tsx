@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { aboutContent } from "./aboutData";
+import { aboutContent } from "../../services/portfolio.service";
 import { FaDownload, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { EMAIL_LINK, GITHUB_LINK, LINKEDIN_LINK, RESUME_LINK } from "../../config/config";
 

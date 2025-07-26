@@ -1,8 +1,8 @@
-import { About as AboutSection } from "../../sections"
-import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
-import { FaProjectDiagram, FaTools, FaBriefcase, FaCertificate, FaBlog, FaEnvelope, FaArrowRight } from "react-icons/fa"
-import { CONTACT_LINK, PROJECTS_LINK } from "../../config/config"
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { About as AboutSection } from "../../sections";
+import { CONTACT_LINK, PROJECTS_LINK } from "../../config/config";
+import { FaProjectDiagram, FaTools, FaBriefcase, FaCertificate, FaBlog, FaEnvelope, FaArrowRight } from "react-icons/fa";
 
 const sectionCards = [
   {
@@ -73,7 +73,7 @@ const About = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4">
@@ -90,13 +90,13 @@ const About = () => {
                 key={card.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 className="group"
               >
                 <Link
                   to={card.link}
-                  className={`block h-full p-6 rounded-2xl border-2 ${card.borderColor} ${card.bgColor} hover:shadow-xl transition-all duration-300 transform hover:border-opacity-80`}
+                  className={`block h-full p-6 rounded-2xl border-2 ${card.borderColor} ${card.bgColor} hover:shadow-xl transition-all duration-200 transform hover:border-opacity-80`}
                 >
                   <div className="flex flex-col h-full">
                     <div className="flex items-center mb-4">
@@ -104,7 +104,7 @@ const About = () => {
                         {card.icon}
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        <h3 className="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
                           {card.title}
                         </h3>
                       </div>
@@ -116,7 +116,7 @@ const About = () => {
                     
                     <div className="flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:text-blue-700 dark:group-hover:text-blue-300">
                       <span className="mr-2">Learn More</span>
-                      <FaArrowRight className="transition-transform group-hover:translate-x-1" />
+                      <FaArrowRight className="transition-transform duration-200 group-hover:translate-x-1" />
                     </div>
                   </div>
                 </Link>
@@ -131,7 +131,7 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           className="max-w-4xl mx-auto text-center"
         >
           <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
@@ -144,13 +144,13 @@ const About = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to={CONTACT_LINK}
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Get In Touch
             </Link>
             <Link
               to={PROJECTS_LINK}
-              className="px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-full font-semibold hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all duration-300"
+              className="px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-full font-semibold hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all duration-200"
             >
               View My Work
             </Link>

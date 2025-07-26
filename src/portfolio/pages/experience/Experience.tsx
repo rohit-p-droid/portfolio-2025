@@ -1,6 +1,6 @@
-import { Experience as ExperienceSection } from "../../sections";
 import { Link } from "react-router-dom";
 import { SKILLS_LINK, BLOG_LINK } from "../../config/config";
+import { Experience as ExperienceSection } from "../../sections";
 
 const Experience = () => {
   return (

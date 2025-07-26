@@ -1,8 +1,8 @@
 import React from "react";
-import { skills } from "./skillData";
 import { motion } from "framer-motion";
 import { FaCode } from "react-icons/fa";
 import { VscCode } from "react-icons/vsc";
+import { skillsContent as skills } from "../../services/portfolio.service";
 import { AiOutlineRobot, AiOutlineSafetyCertificate } from "react-icons/ai";
 import {
   SiReact, SiNextdotjs, SiJavascript, SiTypescript, SiTailwindcss, SiHtml5, SiCss3,

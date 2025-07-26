@@ -1,6 +1,6 @@
-import { Certifications as CertificationSection } from "../../sections";
 import { Link } from "react-router-dom";
 import { BLOG_LINK } from "../../config/config";
+import { Certifications as CertificationSection } from "../../sections";
 
 const Certifications = () => {
   return (

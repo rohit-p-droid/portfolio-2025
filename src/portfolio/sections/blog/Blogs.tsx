@@ -1,14 +1,32 @@
-import { blogPosts } from "./blogData";
 import { motion } from "framer-motion";
+import { Loader } from "../../components";
 import { FaPenNib } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { BLOG_LINK } from "../../config/config";
+import { getBlogs, type BlogPost } from "../../services/blog.service";
 
 const Blog = () => {
+  const [blogPosts, setBlogPost] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getBlogsFromApi();
+  }, [])
+
+  const getBlogsFromApi = async () => {
+    setIsLoading(true);
+    await getBlogs()
+      .then(response => setBlogPost(response.data))
+      .catch(() => console.error("Internal Server Error"))
+      .finally(() => setIsLoading(false));
+  }
+
   return (
     <section
       id="blog"
       className="px-6 sm:px-12 py-24 bg-gradient-to-br from-white via-cyan-50 to-blue-50 dark:from-black dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white transition-colors duration-300"
     >
+      {isLoading && <Loader/>}
       <div className="max-w-6xl mx-auto text-center space-y-14">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -31,10 +49,10 @@ const Blog = () => {
               <div className="flex flex-col justify-between h-full">
                 <div className="space-y-4">
                   <h3 className="text-lg font-bold text-blue-700 dark:text-blue-300 line-clamp-2">{post.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">{post.excerpt}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">{post.description}</p>
 
                   <div className="flex flex-wrap gap-2 text-xs">
-                    {post.tags.map((tag, index) => (
+                    {post.tags.map((tag: string, index: number) => (
                       <span
                         key={index}
                         className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 px-2 py-1 rounded-full"

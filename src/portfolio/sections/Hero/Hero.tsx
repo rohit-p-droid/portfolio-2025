@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { heroContent } from "./heroData";
-import { Typewriter } from "react-simple-typewriter";
 import { RESUME_LINK } from "../../config/config";
+import { Typewriter } from "react-simple-typewriter";
+import { heroContent } from "../../services/portfolio.service";
 
 const Hero = () => {
   return (

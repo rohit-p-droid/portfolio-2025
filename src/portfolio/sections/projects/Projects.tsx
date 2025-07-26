@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { projects } from "./projectsData";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { projectsContent as projects } from "../../services/projects.service";
 
 const Projects = () => {
   return (
@@ -34,7 +34,7 @@ const Projects = () => {
                   className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-3 right-3 flex gap-3 z-10">
-                  <a
+                  {project?.github && <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -42,8 +42,8 @@ const Projects = () => {
                     title="GitHub Repository"
                   >
                     <FaGithub className="text-lg" />
-                  </a>
-                  <a
+                  </a>}
+                  {project?.live && <a
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -51,7 +51,7 @@ const Projects = () => {
                     title="Live Demo"
                   >
                     <FaExternalLinkAlt className="text-sm" />
-                  </a>
+                  </a>}
                 </div>
               </div>
 

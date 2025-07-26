@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaBriefcase } from "react-icons/fa";
-import { experience } from "./experienceData";
+import { experienceContent as experience } from "../../services/portfolio.service";
 
 const Experience = () => {
   return (

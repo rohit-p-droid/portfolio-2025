@@ -1,26 +1,46 @@
-import { Link, useParams } from "react-router-dom";
-import { motion } from "framer-motion";
-import { FaArrowLeft, FaCalendar, FaClock, FaTags, FaUser } from "react-icons/fa";
-import { blogOverviewData, relatedBlogs } from "./blogOverviewData";
-import { HOME_LINK, CONTACT_LINK, BLOG_LINK } from "../../config/config";
 import "./BlogOverview.css";
+import { motion } from "framer-motion";
 import BlogNotFound from "./BlogNotFound";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { HOME_LINK, CONTACT_LINK, BLOG_LINK } from "../../config/config";
+import { FaArrowLeft, FaCalendar, FaClock, FaTags, FaUser } from "react-icons/fa";
+import { getBlogDetailBySlug, type BlogDetailView, relatedBlogs } from "../../services/blog.service";
+import { Loader } from "../../components";
 
 const BlogOverview = () => {
-  // For demo purposes, we'll use the static blog data
-  // In a real app, you'd fetch this data from an API based on the blog ID
-  const {slug} = useParams();
-  
-  const blogPost = blogOverviewData;
+  const { slug } = useParams<{ slug: string }>();
+  const [blogPost, setBlogPost] = useState<BlogDetailView | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (slug) {
+      getBlog(slug);
+    }
+  }, [slug])
+
+  const getBlog = (slug: string) => {
+    setIsLoading(true);
+    getBlogDetailBySlug(slug)
+      .then(response => {
+        setBlogPost(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching blog:', error);
+        setBlogPost(null);
+      })
+      .finally(() => setIsLoading(false));
+  }
 
   if (!blogPost) {
     return (
-      <BlogNotFound/>
+      <BlogNotFound />
     );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-cyan-50 to-blue-50 dark:from-black dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
+      {isLoading && <Loader />}
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back Button */}
         <motion.div
@@ -48,7 +68,7 @@ const BlogOverview = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             {blogPost.title}
           </h1>
-          
+
           <div className="flex flex-wrap items-center gap-6 text-gray-600 dark:text-gray-400 mb-6">
             <div className="flex items-center gap-2">
               <FaUser className="text-blue-500" />
@@ -88,11 +108,11 @@ const BlogOverview = () => {
         >
           <div className="prose prose-lg dark:prose-invert max-w-none text-gray-900 dark:text-white">
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 font-medium leading-relaxed">
-              {blogPost.excerpt}
+              {blogPost.description}
             </p>
-            
+
             {/* Render HTML content */}
-            <div 
+            <div
               dangerouslySetInnerHTML={{ __html: blogPost.content }}
               className="blog-content"
             />
@@ -108,7 +128,7 @@ const BlogOverview = () => {
         >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Related Articles</h3>
           <div className="grid gap-6 md:grid-cols-2">
-            {relatedBlogs.map((relatedBlog) => (
+            {relatedBlogs.map((relatedBlog: any) => (
               <Link
                 key={relatedBlog.id}
                 to={`/blog/${relatedBlog.id}`}
