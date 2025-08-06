@@ -1,24 +1,6 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { FaCode } from "react-icons/fa";
-import { VscCode } from "react-icons/vsc";
-import { skillsContent as skills } from "../../services/portfolio.service";
-import { AiOutlineRobot, AiOutlineSafetyCertificate } from "react-icons/ai";
-import {
-  SiReact, SiNextdotjs, SiJavascript, SiTypescript, SiTailwindcss, SiHtml5, SiCss3,
-  SiNodedotjs, SiExpress, SiSpringboot, SiDjango,
-  SiMongodb, SiPostgresql, SiSqlite, SiFirebase,
-  SiGit, SiGithub, SiPostman, SiDocker, SiFigma,
-  SiAmazon, SiGnubash
-} from "react-icons/si";
-
-const iconMap: Record<string, React.ReactNode> = {
-  "React": <SiReact className="text-cyan-500" />, "Next.js": <SiNextdotjs className="text-black dark:text-white" />, "JavaScript": <SiJavascript className="text-yellow-400" />, "TypeScript": <SiTypescript className="text-blue-600" />, "Tailwind CSS": <SiTailwindcss className="text-teal-400" />, "HTML": <SiHtml5 className="text-orange-500" />, "CSS": <SiCss3 className="text-blue-400" />,
-  "Node.js": <SiNodedotjs className="text-green-600" />, "Express": <SiExpress className="text-gray-800 dark:text-gray-200" />, "Spring Boot": <SiSpringboot className="text-green-700" />, "Django": <SiDjango className="text-green-900" />, "REST APIs": <FaCode className="text-purple-500" />,
-  "MongoDB": <SiMongodb className="text-green-700" />, "PostgreSQL": <SiPostgresql className="text-blue-700" />, "SQLite": <SiSqlite className="text-gray-500" />, "Firebase": <SiFirebase className="text-yellow-500" />,
-  "Git": <SiGit className="text-orange-600" />, "GitHub": <SiGithub className="text-gray-900 dark:text-gray-100" />, "Postman": <SiPostman className="text-red-500" />, "VS Code": <VscCode className="text-blue-500" />, "Docker": <SiDocker className="text-blue-400" />, "Figma": <SiFigma className="text-pink-500" />,
-  "AI/ML": <AiOutlineRobot className="text-indigo-500" />, "System Design": <SiGnubash className="text-gray-700" />, "Cloud (AWS)": <SiAmazon className="text-yellow-600" />, "Cybersecurity": <AiOutlineSafetyCertificate className="text-red-600" />
-};
+import { UseSkills } from "../../hooks/portfolio.hook";
+import { Loader } from "../../components";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -33,6 +15,28 @@ const cardVariants = {
 };
 
 const Skills = () => {
+  const { data: skills, isLoading, isError } = UseSkills();
+
+  if (isLoading) {
+    return (
+      <section className="py-24 sm:px-12 px-6 bg-gray-50 dark:bg-gray-800">
+        <Loader />
+      </section>
+    );
+  }
+
+  if (isError || !skills) {
+    return (
+      <section className="py-24 sm:px-12 px-6 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-red-600 dark:text-red-400">
+            Error loading skills data
+          </p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id="skills"
@@ -71,19 +75,30 @@ const Skills = () => {
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center md:text-left">
               {skillCategory.category}
             </h3>
-            <div className="flex flex-wrap justify-center gap-6">
-              {skillCategory.items.map((skill) => (
-                <motion.div
-                  key={skill}
-                  whileHover={{ y: -5, scale: 1.05 }}
-                  className="flex flex-col items-center gap-2 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 w-32 text-center"
-                >
-                  <div className="text-4xl">
-                    {iconMap[skill] || <FaCode className="text-purple-500" />}
-                  </div>
-                  <span className="font-semibold text-gray-700 dark:text-gray-300">{skill}</span>
-                </motion.div>
-              ))}
+            <div className="flex flex-wrap justify-start gap-6 md:ml-45">
+              {skillCategory.items.map((skill) => {
+                // Process SVG to ensure proper sizing
+                const processedIcon = skill.icon
+                  .replace(/width="[^"]*"/g, 'width="48"')
+                  .replace(/height="[^"]*"/g, 'height="48"')
+                  .replace(/className="[^"]*"/g, 'className="w-12 h-12"');
+                
+                return (
+                  <motion.div
+                    key={skill.name}
+                    whileHover={{ y: -5, scale: 1.05 }}
+                    className="flex flex-col items-center gap-2 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 w-32 text-center border border-gray-200 dark:border-gray-600"
+                  >
+                    <div 
+                      className="w-12 h-12 flex items-center justify-center overflow-hidden" 
+                      dangerouslySetInnerHTML={{ __html: processedIcon }} 
+                    />
+                    <span className="font-semibold text-gray-700 dark:text-gray-300 text-sm">
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         ))}

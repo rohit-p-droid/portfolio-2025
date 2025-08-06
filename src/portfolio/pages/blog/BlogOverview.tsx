@@ -1,36 +1,18 @@
 import "./BlogOverview.css";
 import { motion } from "framer-motion";
 import BlogNotFound from "./BlogNotFound";
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { HOME_LINK, CONTACT_LINK, BLOG_LINK } from "../../config/config";
-import { FaArrowLeft, FaCalendar, FaClock, FaTags, FaUser } from "react-icons/fa";
-import { getBlogDetailBySlug, type BlogDetailView, relatedBlogs } from "../../services/blog.service";
+import { FaArrowLeft, FaCalendar, FaClock, FaTags } from "react-icons/fa";
+import { formatDate } from "../../../common/utils";
+
 import { Loader } from "../../components";
+import { UseBlogDetail } from "../../hooks/blog.hook";
 
 const BlogOverview = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const [blogPost, setBlogPost] = useState<BlogDetailView | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (slug) {
-      getBlog(slug);
-    }
-  }, [slug])
-
-  const getBlog = (slug: string) => {
-    setIsLoading(true);
-    getBlogDetailBySlug(slug)
-      .then(response => {
-        setBlogPost(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching blog:', error);
-        setBlogPost(null);
-      })
-      .finally(() => setIsLoading(false));
-  }
+  const { slug } = useParams();
+  const {data: blogPost, isLoading} = UseBlogDetail(slug);
+  const relatedBlogs: any = [];
 
   if (!blogPost) {
     return (
@@ -71,16 +53,12 @@ const BlogOverview = () => {
 
           <div className="flex flex-wrap items-center gap-6 text-gray-600 dark:text-gray-400 mb-6">
             <div className="flex items-center gap-2">
-              <FaUser className="text-blue-500" />
-              <span>{blogPost.author}</span>
-            </div>
-            <div className="flex items-center gap-2">
               <FaCalendar className="text-blue-500" />
-              <span>{blogPost.date}</span>
+              <span>Published: {formatDate(blogPost.date)}</span>
             </div>
             <div className="flex items-center gap-2">
-              <FaClock className="text-blue-500" />
-              <span>{blogPost.readTime}</span>
+              <FaClock className="text-green-500" />
+              <span>Read Time: {blogPost.readTime}</span>
             </div>
           </div>
 
@@ -120,7 +98,7 @@ const BlogOverview = () => {
         </motion.div>
 
         {/* Related Blogs */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -128,7 +106,7 @@ const BlogOverview = () => {
         >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Related Articles</h3>
           <div className="grid gap-6 md:grid-cols-2">
-            {relatedBlogs.map((relatedBlog: any) => (
+            {relatedBlogs?.map((relatedBlog: any) => (
               <Link
                 key={relatedBlog.id}
                 to={`/blog/${relatedBlog.id}`}
@@ -141,13 +119,13 @@ const BlogOverview = () => {
                   {relatedBlog.excerpt}
                 </p>
                 <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-                  <span>{relatedBlog.date}</span>
-                  <span>{relatedBlog.readTime}</span>
+                  <span>📅 {formatDate(relatedBlog.date)}</span>
+                  <span>⏱️ {relatedBlog.readTime}</span>
                 </div>
               </Link>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Navigation Links */}
         <motion.div

@@ -1,26 +1,14 @@
 import { motion } from "framer-motion";
 import { Loader } from "../../components";
-import { FaPenNib } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { FaPenNib, FaCalendarAlt, FaClock } from "react-icons/fa";
 import { BLOG_LINK } from "../../config/config";
-import { getBlogs, type BlogPost } from "../../services/blog.service";
+import { UseBlogList } from "../../hooks/blog.hook";
+import { formatDate } from "../../../common/utils";
 
 const Blog = () => {
-  const [blogPosts, setBlogPost] = useState<BlogPost[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    getBlogsFromApi();
-  }, [])
-
-  const getBlogsFromApi = async () => {
-    setIsLoading(true);
-    await getBlogs()
-      .then(response => setBlogPost(response.data))
-      .catch(() => console.error("Internal Server Error"))
-      .finally(() => setIsLoading(false));
-  }
-
+  
+  const {data: blogPosts, isLoading} = UseBlogList();
+  
   return (
     <section
       id="blog"
@@ -38,7 +26,7 @@ const Blog = () => {
         </motion.h2>
 
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.map((post, idx) => (
+          {blogPosts?.map((post, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}
@@ -64,8 +52,14 @@ const Blog = () => {
                 </div>
 
                 <div className="mt-6 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-                  <span>{post.date}</span>
-                  <span>{post.readTime}</span>
+                  <span className="flex items-center gap-1.5">
+                    <FaCalendarAlt className="text-blue-500 dark:text-blue-400" />
+                    <span>Published: {formatDate(post.date)}</span>
+                  </span>
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <FaClock className="text-green-500 dark:text-green-400" />
+                    <span>Read Time: {post.readTime}</span>
+                  </span>
                 </div>
 
                 <a

@@ -9,6 +9,7 @@ export interface HeroContent {
 export interface AboutContent {
     title: string;
     paragraphs: string[];
+    photo: string;
     experienceCount: number;
     projectsCount: number;
     technologyCount: number;
@@ -16,7 +17,7 @@ export interface AboutContent {
 
 export interface SkillItem {
     name: string;
-    iconName: string;
+    icon: string; // SVG content as string from backend
 }
 
 export interface SkillCategory {

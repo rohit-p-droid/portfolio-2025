@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import { UseProjects } from "../../hooks/portfolio.hook";
 import { Loader } from "../../components";
+import { UseProjects } from "../../hooks/project.hook";
 
 const Projects = () => {
   const { data: projects, isLoading } = UseProjects();

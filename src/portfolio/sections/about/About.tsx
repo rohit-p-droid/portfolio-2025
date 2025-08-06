@@ -9,6 +9,7 @@ const About = () => {
 
   const aboutContent = {
     title: aboutData?.title || "",
+    photo: aboutData?.photo || "",
     paragraphs: aboutData?.paragraphs || [],
     experienceCount: aboutData?.experienceCount || "",
     projectsCount: aboutData?.projectsCount || "",
@@ -58,7 +59,7 @@ const About = () => {
           <div className="relative group">
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl opacity-20 group-hover:opacity-30 transition-opacity duration-300 blur-xl"></div>
             <img
-              src="/assets/rohit.jpg"
+              src={aboutContent.photo}
               alt="About Rohit"
               className="relative w-80 h-80 object-cover rounded-xl shadow-2xl dark:shadow-blue-800/50 border-4 border-white dark:border-gray-700 group-hover:scale-105 transition-transform duration-300"
             />
