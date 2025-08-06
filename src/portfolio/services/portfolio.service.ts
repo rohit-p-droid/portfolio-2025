@@ -1,24 +1,3 @@
-export const heroContent = {
-    name: "Rohit Patil",
-    role: "Software Engineer",
-    tagline: "Crafting scalable, impactful, and elegant solutions through code.",
-    description: "I'm a skilled Full-Stack Software Engineer with expertise in both frontend (React.js, TypeScript, Tailwind CSS) and backend (Node.js, NestJS, Django) development. With a solid grasp of system design and a growing passion for AI, I specialize in building scalable, high-impact web applications that blend performance with innovation.",
-    projectsLink: "#projects",
-    photo: "/assets/rohit.jpg",
-};
-
-export const aboutContent = {
-    title: "About Me",
-    paragraphs: [
-        "I'm Rohit Patil, a passionate Software Engineer with a strong drive to build high-performance web applications and solve real-world problems through code. I believe in writing clean, scalable code that makes a difference.",
-        "With hands-on experience in React, Node.js, Spring Boot, and Django, I'm constantly learning and exploring new technologies like AI, cloud computing, and system design. I love turning complex problems into simple, beautiful solutions.",
-        "My goal is to create scalable products that deliver exceptional user experiences and bring real value to businesses and users alike. I'm also on a mission to grow into one of the most successful tech entrepreneurs, building products that matter."
-    ],
-    experieceCount: 1,
-    projectsCount: 3,
-    technologyCount: 10,
-};
-
 export const skillsContent = [
     {
         category: "Frontend",
@@ -39,26 +18,6 @@ export const skillsContent = [
     {
         category: "Learning / Focus Areas",
         items: ["AI/ML", "System Design", "Cloud (AWS)", "Cybersecurity"]
-    }
-];
-
-export const certificatesContent = [
-    {
-        title: "Deep Learning Specialization",
-        platform: "Coursera",
-        date: "June 2024",
-        link: "https://coursera.org/verify/XYZ123"
-    },
-    {
-        title: "AWS Certified Cloud Practitioner",
-        platform: "Amazon",
-        date: "March 2024",
-    },
-    {
-        title: "Full Stack Developer Bootcamp",
-        platform: "Udemy",
-        date: "December 2023",
-        link: "https://udemy.com/certificate/ABC456"
     }
 ];
 
@@ -86,6 +45,65 @@ export const experienceContent = [
     ]
   }
 ];
+
+// +++++++++++++++++++++++++++++++++++++++++++======================
+
+import { apiRequest } from "../../utils/apiRequest";
+import type { ApiResponse } from "../../common/types";
+import type { HeroContent, AboutContent, SkillCategory, CertificateContent, ProjectContent, ExperienceContent } from "./sectionsType";
+
+
+
+export const getHeroSection = async (): Promise<HeroContent> => {
+    const response: ApiResponse<HeroContent> = await apiRequest({
+        url: "/portfolio/hero-section/active",
+        method: "GET"
+    });
+    if (!response.data ) throw new Error('Hero section data not found');
+    return response.data;
+};
+
+export const getAboutSection = async (): Promise<AboutContent> => {
+    await new Promise(resolve => setTimeout(resolve, 10000));
+    const response: ApiResponse<AboutContent> = await apiRequest({
+        url: "/portfolio/about-section/active",
+        method: "GET"
+    });
+    if (!response.data ) throw new Error('Hero section data not found');
+    return response.data;
+};
+
+export const getCertificates = async (): Promise<CertificateContent[]> => {
+    const response: ApiResponse<CertificateContent[]> = await apiRequest({
+        url: "/portfolio/certificate/active",
+        method: "GET"
+    });
+    if(!response.data) throw new Error("Certificate data not found");
+    return response.data;
+};
+
+export const getProjects = async (): Promise<ProjectContent[]> => {
+    const response: ApiResponse<ProjectContent[]> = await apiRequest({
+        url: "/project/active",
+        method: "GET"
+    });
+    if(!response.data) throw new Error("Projects data not found");
+    return response.data;
+}
+
+export const getExperience = async (): Promise<ExperienceContent[]> => {
+    const response: ApiResponse<ExperienceContent[]> = await apiRequest({
+        url: "/portfolio/experience/",
+        method: "GET"
+    });
+    if(!response.data) throw new Error("Experience data not found");
+    return response.data;
+}
+
+
+
+
+
 
 
 

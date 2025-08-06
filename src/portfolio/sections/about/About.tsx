@@ -1,9 +1,20 @@
 import { motion } from "framer-motion";
-import { aboutContent } from "../../services/portfolio.service";
 import { FaDownload, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { EMAIL_LINK, GITHUB_LINK, LINKEDIN_LINK, RESUME_LINK } from "../../config/config";
+import { UseAboutSection } from "../../hooks/portfolio.hook";
+import { Loader } from "../../components";
 
 const About = () => {
+  const { data: aboutData, isLoading } = UseAboutSection();
+
+  const aboutContent = {
+    title: aboutData?.title || "",
+    paragraphs: aboutData?.paragraphs || [],
+    experienceCount: aboutData?.experienceCount || "",
+    projectsCount: aboutData?.projectsCount || "",
+    technologyCount: aboutData?.technologyCount || "",
+  }
+
   const socialLinks = [
     {
       icon: <FaGithub className="text-xl" />,
@@ -30,6 +41,8 @@ const About = () => {
       id="about"
       className="px-6 sm:px-12 py-24 bg-gradient-to-b from-cyan-100 via-blue-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black text-gray-800 dark:text-white transition-colors duration-400 relative overflow-hidden"
     >
+      {isLoading && <Loader />}
+
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 dark:bg-blue-900 rounded-full opacity-10 -translate-y-48 translate-x-48"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-cyan-200 dark:bg-cyan-900 rounded-full opacity-10 translate-y-40 -translate-x-40"></div>
@@ -63,7 +76,7 @@ const About = () => {
           className="space-y-8"
         >
           <div>
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -81,7 +94,7 @@ const About = () => {
 
           <div className="space-y-6 text-lg sm:text-xl text-gray-700 dark:text-gray-300">
             {aboutContent.paragraphs.map((para, idx) => (
-              <motion.p 
+              <motion.p
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +114,7 @@ const About = () => {
             className="grid grid-cols-3 gap-4 py-6"
           >
             <div className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{aboutContent.experieceCount}+</div>
+              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{aboutContent.experienceCount}+</div>
               <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
             </div>
             <div className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
@@ -129,7 +142,7 @@ const About = () => {
               <FaDownload className="text-sm" />
               Download Resume
             </a>
-            
+
             <div className="flex gap-4 ml-4">
               {socialLinks.map((social, idx) => (
                 <motion.a
