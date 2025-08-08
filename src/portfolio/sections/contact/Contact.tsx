@@ -30,7 +30,6 @@ const Contact = () => {
       .then(() => {
         setShowSuccess(true);
         setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setShowSuccess(false), 5000);
       })
       .catch(error => {
         console.error('Error sending message:', error);
