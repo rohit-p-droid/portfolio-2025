@@ -12,7 +12,7 @@ import { UseBlogDetail } from "../../hooks/blog.hook";
 const BlogOverview = () => {
   const { slug } = useParams();
   const {data: blogPost, isLoading} = UseBlogDetail(slug);
-  const relatedBlogs: any = [];
+  // const relatedBlogs: any = [];
 
   if (!blogPost) {
     return (
