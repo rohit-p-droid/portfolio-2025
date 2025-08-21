@@ -1,4 +1,5 @@
 import { config } from "../config/config";
+import { tokenStorage } from './tokenStorage';
 
 export interface ApiRequestType {
     url: string;
@@ -14,6 +15,8 @@ export async function apiRequest<T>({
     headers = {},
 }: ApiRequestType): Promise<T> {
     try {
+        const token = tokenStorage.get();
+        
         const options: RequestInit = {
             method,
             headers: {
@@ -21,6 +24,14 @@ export async function apiRequest<T>({
                 ...headers,
             },
         };
+
+        // Add Authorization header if token exists
+        if (token) {
+            options.headers = {
+                ...options.headers,
+                'Authorization': `Bearer ${token}`,
+            };
+        }
 
         if (data && method !== "GET") {
             options.body = JSON.stringify(data);
