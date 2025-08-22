@@ -8,7 +8,9 @@ const BlogList: React.FC = () => {
     <>
      <Card title='Blogs'>
       <div>
-        
+        {/* <DataTable
+
+        /> */}
       </div>
      </Card>
     </>

@@ -14,15 +14,18 @@ const BlogOverview = () => {
   const {data: blogPost, isLoading} = UseBlogDetail(slug);
   // const relatedBlogs: any = [];
 
-  if (!blogPost) {
-    return (
-      <BlogNotFound />
-    );
+  if (isLoading) {
+    return <Loader />;
   }
+
+  if (!isLoading && !blogPost) {
+    return <BlogNotFound />;
+  }
+
+  if (!blogPost) return <BlogNotFound />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-cyan-50 to-blue-50 dark:from-black dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
-      {isLoading && <Loader />}
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back Button */}
         <motion.div

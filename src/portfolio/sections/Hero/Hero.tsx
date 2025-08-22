@@ -21,7 +21,7 @@ const Hero = () => {
 
       <section
         id="hero"
-        className="relative min-h-screen flex items-center justify-center px-6 sm:px-12 bg-gradient-to-br from-blue-50 via-cyan-50 to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-black text-gray-900 dark:text-white transition-colors duration-400 overflow-hidden"
+        className="relative min-h-screen flex items-center justify-center pt-20 sm:pt-0 px-6 sm:px-12 bg-gradient-to-br from-blue-50 via-cyan-50 to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-black text-gray-900 dark:text-white transition-colors duration-400 overflow-hidden"
       >
         <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
           {/* Text Section */}

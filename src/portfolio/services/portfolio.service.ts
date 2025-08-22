@@ -5,6 +5,7 @@ import type { HeroContent, AboutContent, SkillCategory, CertificateContent, Expe
 
 
 export const getHeroSection = async (): Promise<HeroContent> => {
+    setTimeout(() => {}, 30000);
     const response: ApiResponse<HeroContent> = await apiRequest({
         url: "/portfolio/hero-section/active",
         method: "GET"

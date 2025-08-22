@@ -1,6 +1,28 @@
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const Loader = () => {
+
+  const funnyMessages = [
+    "Loading… because teleportation isn’t ready yet 🌀",
+    "Knocking on the server’s door… it’s slow to wake up 🚪💤",
+    "Spinning up infinite loops… hold tight! 🔄",
+    "Buffering… like it’s 2005 YouTub 📼",
+    "Negotiating with the server union… 🤝"
+  ];
+
+  const [message, setMessage] = useState(funnyMessages[0]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomMsg =
+        funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
+      setMessage(randomMsg);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+
   return (
     <div className="fixed inset-0 z-[999] bg-black/50 dark:bg-black/70 backdrop-blur-sm flex items-center justify-center">
       <div className="text-center space-y-8">
@@ -17,7 +39,7 @@ const Loader = () => {
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               className="w-20 h-20 border-4 border-blue-200 dark:border-blue-800 border-t-blue-600 dark:border-t-blue-400 rounded-full"
             />
-            
+
           </div>
         </motion.div>
 
@@ -38,8 +60,8 @@ const Loader = () => {
               ...
             </motion.span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
-            Please wait while we prepare your content
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
+            {message}
           </p>
         </motion.div>
 
@@ -56,9 +78,9 @@ const Loader = () => {
               animate={{
                 scale: [1, 1.2, 1],
                 backgroundColor: [
-                  "rgb(59, 130, 246)", 
+                  "rgb(59, 130, 246)",
                   "rgb(34, 197, 94)",
-                  "rgb(59, 130, 246)", 
+                  "rgb(59, 130, 246)",
                 ],
               }}
               transition={{
