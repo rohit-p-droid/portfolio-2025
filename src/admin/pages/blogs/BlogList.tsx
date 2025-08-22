@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '../../components/Card/Card';
-import { DataTable } from '../../components';
+// import { DataTable } from '../../components';
 
 const BlogList: React.FC = () => {
 
@@ -8,9 +8,9 @@ const BlogList: React.FC = () => {
     <>
      <Card title='Blogs'>
       <div>
-        <DataTable
+        {/* <DataTable
 
-        />
+        /> */}
       </div>
      </Card>
     </>
