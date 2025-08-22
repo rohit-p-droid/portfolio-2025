@@ -1,35 +1,70 @@
 import App from "../App";
-import { Suspense, lazy } from "react";
+import { lazy } from "react";
+import blogRoutes from "./blog";
+import skillRoutes from "./skill";
+import projectRoutes from "./project";
+import LazyComponent from "../../components/LazyComponent";
 
+const Login = lazy(() => import("../pages/auth/Login"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
-
-const AdminLoading = () => (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-        <div className="relative">
-            <div className="animate-spin rounded-full h-12 w-12 border-3 border-gray-200 dark:border-gray-600"></div>
-            <div className="animate-spin rounded-full h-12 w-12 border-3 border-gray-600 border-t-transparent absolute top-0 left-0"></div>
-        </div>
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-300 font-medium">Loading...</p>
-    </div>
-);
-
-const LazyComponent = ({ children }: { children: React.ReactNode }) => (
-    <Suspense fallback={<AdminLoading />}>
-        {children}
-    </Suspense>
-);
+const Settings = lazy(() => import("../pages/Settings"));
+const DashboardLayout = lazy(() => import("../layouts/DashboardLayout"));
+const ProtectedRoute = lazy(() => import("../components/ProtectedRoute"));
 
 export const adminRoutes = {
     path: "/admin",
     element: <App />,
     children: [
         {
-            path: "",
+            path: "login",
             element: (
                 <LazyComponent>
-                    <Dashboard />
+                    <Login />
                 </LazyComponent>
             )
         },
+        {
+            path: "",
+            element: (
+                <LazyComponent>
+                    <ProtectedRoute>
+                        <DashboardLayout />
+                    </ProtectedRoute>
+                </LazyComponent>
+            ),
+            children: [
+                {
+                    index: true,
+                    element: (
+                        <LazyComponent>
+                            <Dashboard />
+                        </LazyComponent>
+                    )
+                },
+                projectRoutes,
+                skillRoutes,
+                blogRoutes,
+                ,
+                {
+                    path: "certificates",
+                    element: (
+                        <LazyComponent>
+                            <div className="text-center py-12">
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Certificates Management</h2>
+                                <p className="mt-2 text-gray-600 dark:text-gray-400">Coming soon...</p>
+                            </div>
+                        </LazyComponent>
+                    )
+                },
+                {
+                    path: "settings",
+                    element: (
+                        <LazyComponent>
+                            <Settings />
+                        </LazyComponent>
+                    )
+                }
+            ]
+        }
     ],
 };
