@@ -1,8 +1,9 @@
-import LazyComponent from "../../components/LazyComponent";
 import App from "../App";
 import { lazy } from "react";
-import projectRoutes from "./project";
+import blogRoutes from "./blog";
 import skillRoutes from "./skill";
+import projectRoutes from "./project";
+import LazyComponent from "../../components/LazyComponent";
 
 const Login = lazy(() => import("../pages/auth/Login"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
@@ -42,18 +43,8 @@ export const adminRoutes = {
                 },
                 projectRoutes,
                 skillRoutes,
+                blogRoutes,
                 ,
-                {
-                    path: "blog",
-                    element: (
-                        <LazyComponent>
-                            <div className="text-center py-12">
-                                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Blog Management</h2>
-                                <p className="mt-2 text-gray-600 dark:text-gray-400">Coming soon...</p>
-                            </div>
-                        </LazyComponent>
-                    )
-                },
                 {
                     path: "certificates",
                     element: (
