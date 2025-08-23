@@ -55,7 +55,7 @@ export const getBlogs = async (params: BlogsQueryParams = {}): Promise<{
     if (params.search) queryParams.append('title', params.search); // Using title for search
 
     const queryString = queryParams.toString();
-    const url = `/portfolio/blog${queryString ? `?${queryString}` : ''}`;
+    const url = `/blog/${queryString ? `?${queryString}` : ''}`;
     
     const response: ApiResponse<BlogsApiResponse> = await apiRequest({
       url,
