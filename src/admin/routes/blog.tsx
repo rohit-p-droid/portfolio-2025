@@ -5,7 +5,7 @@ const BlogList = lazy(() => import("../pages/blogs/BlogList"));
 const BlogForm = lazy(() => import("../pages/blogs/BlogForm"));
 
 const blogRoutes = {
-    path: 'blog',
+    path: 'blogs',
     children: [
         {
             index: true,

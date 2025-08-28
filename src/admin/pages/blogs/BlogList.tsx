@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { BiX } from 'react-icons/bi';
+import { TiTick } from 'react-icons/ti';
+import Alert from '../../components/Alert';
 import Card from '../../components/Card/Card';
+import React, { useState, useEffect } from 'react';
+import { BsPencilSquare, BsTrash } from 'react-icons/bs';
+import { useConfirmation, useAlert } from '../../hooks/useModal';
 import DataTable, { type Column } from '../../components/DataTable';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
-import Alert from '../../components/Alert';
-import { useConfirmation, useAlert } from '../../hooks/useModal';
-import { getBlogs, deleteBlog, type Blog, type BlogsQueryParams } from '../../services/blog.service';
+import { getBlogs, deleteBlog, type Blog, type BlogsQueryParams, BlogStatus, changeBlogStatus } from '../../services/blog.service';
+import { formatDate } from '../../../common/utils';
 
 const BlogList: React.FC = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -23,10 +27,10 @@ const BlogList: React.FC = () => {
       setBlogs(res.blogs);
       setPagination(res.pagination);
     } catch (err) {
-      showAlert({ 
-        title: 'Error', 
-        message: err instanceof Error ? err.message : 'Failed to load blogs', 
-        type: 'error' 
+      showAlert({
+        title: 'Error',
+        message: err instanceof Error ? err.message : 'Failed to load blogs',
+        type: 'error'
       });
     } finally {
       setLoading(false);
@@ -34,17 +38,7 @@ const BlogList: React.FC = () => {
   };
 
   useEffect(() => {
-    const params: BlogsQueryParams = {
-      page: pagination.page,
-      limit: pagination.limit,
-    };
-    if (searchTerm.trim()) params.search = searchTerm.trim();
-
-    const timer = setTimeout(() => {
-      fetchBlogs(params);
-    }, 400);
-
-    return () => clearTimeout(timer);
+    fetchBlogs({ page: 1, limit: 10 });
   }, []);
 
   const handleDelete = (id: string) => {
@@ -60,17 +54,17 @@ const BlogList: React.FC = () => {
           await deleteBlog(id);
           fetchBlogs({ page: pagination.page, limit: pagination.limit, search: searchTerm || undefined });
           hideConfirmation();
-          showAlert({ 
-            title: 'Success', 
-            message: 'Blog post deleted successfully', 
-            type: 'success' 
+          showAlert({
+            title: 'Success',
+            message: 'Blog post deleted successfully',
+            type: 'success'
           });
         } catch (err) {
           hideConfirmation();
-          showAlert({ 
-            title: 'Error', 
-            message: err instanceof Error ? err.message : 'Failed to delete blog post', 
-            type: 'error' 
+          showAlert({
+            title: 'Error',
+            message: err instanceof Error ? err.message : 'Failed to delete blog post',
+            type: 'error'
           });
         } finally {
           setDeleteLoading(false);
@@ -79,41 +73,89 @@ const BlogList: React.FC = () => {
     });
   };
 
-  const handlePageChange = (page: number) => setPagination(prev => ({ ...prev, page }));
-  const handlePageSizeChange = (limit: number) => setPagination(prev => ({ ...prev, limit, page: 1 }));
-  const handleSearch = (search: string) => { 
-    setSearchTerm(search); 
-    setPagination(prev => ({ ...prev, page: 1 })); 
+  const handleStatusChange = (id: string) => {
+    showConfirmation({
+      title: 'Change Blog Status',
+      message: 'Are you sure you want to change status of this blog?',
+      type: 'warning',
+      confirmText: 'Change',
+      cancelText: 'Cancel',
+      onConfirm: async () => {
+        try {
+          setDeleteLoading(true);
+          await changeBlogStatus(id);
+          fetchBlogs({ page: pagination.page, limit: pagination.limit, search: searchTerm || undefined });
+          hideConfirmation();
+          showAlert({
+            title: 'Success',
+            message: 'Blog post status change successfully',
+            type: 'success'
+          });
+        } catch (err) {
+          hideConfirmation();
+          showAlert({
+            title: 'Error',
+            message: err instanceof Error ? err.message : 'Failed to chanage blog status',
+            type: 'error'
+          });
+        } finally {
+          setDeleteLoading(false);
+        }
+      }
+    });
+  };
+
+
+  const handlePageChange = (page: number) => {
+    setPagination(prev => ({ ...prev, page }));
+    const params: BlogsQueryParams = {
+      page,
+      limit: pagination.limit,
+    };
+    if (searchTerm.trim()) params.search = searchTerm.trim();
+    fetchBlogs(params);
+  };
+
+  const handlePageSizeChange = (limit: number) => {
+    setPagination(prev => ({ ...prev, limit, page: 1 }));
+    const params: BlogsQueryParams = {
+      page: 1,
+      limit,
+    };
+    if (searchTerm.trim()) params.search = searchTerm.trim();
+    fetchBlogs(params);
+  };
+
+  const handleSearch = (search: string) => {
+    setSearchTerm(search);
+    setPagination(prev => ({ ...prev, page: 1 }));
+    const params: BlogsQueryParams = {
+      page: 1,
+      limit: pagination.limit,
+    };
+    if (search.trim()) params.search = search.trim();
+    fetchBlogs(params);
   };
 
   const columns: Column<Blog>[] = [
-    { 
-      key: 'title', 
-      label: 'Title', 
+    {
+      key: 'serial',
+      label: 'Sr.No.',
+      render: (_, blog) => {
+        const index = blogs.findIndex(b => b._id === blog._id);
+        return (
+          <div className="font-medium text-gray-900 dark:text-white">
+            {(pagination.page - 1) * pagination.limit + index + 1}
+          </div>
+        );
+      }
+    },
+    {
+      key: 'title',
+      label: 'Title',
       render: (_, blog) => (
         <div className="font-medium text-gray-900 dark:text-white">
           {blog.title}
-        </div>
-      )
-    },
-    {
-      key: 'tags',
-      label: 'Tags',
-      render: (_, blog) => (
-        <div className="flex flex-wrap gap-1">
-          {blog.tags.slice(0, 3).map((tag, index) => (
-            <span
-              key={index}
-              className="inline-block bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs px-2 py-1 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
-          {blog.tags.length > 3 && (
-            <span className="text-gray-500 dark:text-gray-400 text-xs">
-              +{blog.tags.length - 3} more
-            </span>
-          )}
         </div>
       )
     },
@@ -131,7 +173,16 @@ const BlogList: React.FC = () => {
       label: 'Published',
       render: (_, blog) => (
         <span className="text-gray-600 dark:text-gray-400">
-          {new Date(blog.date).toLocaleDateString()}
+          {formatDate(blog.date)}
+        </span>
+      )
+    },
+    {
+      key: 'status',
+      label: 'Status',
+      render: (_, blog) => (
+        <span className="text-gray-600 dark:text-gray-400">
+          {blog.status}
         </span>
       )
     },
@@ -140,18 +191,39 @@ const BlogList: React.FC = () => {
       label: 'Actions',
       render: (_, blog) => (
         <div className="flex gap-2">
-          <a 
+          <a
             href={`/admin/blogs/edit/${blog._id}`}
-            className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+            className="text-blue-600 hover:text-blue-700 p-2 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all duration-200"
+            title="Edit blog"
           >
-            Edit
+            <BsPencilSquare size={20} />
           </a>
-          <button 
+          <button
             onClick={() => handleDelete(blog._id)}
-            className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 font-medium"
+            className="text-red-600 hover:text-red-700 p-2 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-200"
+            title="Delete blog"
           >
-            Delete
+            <BsTrash size={20} />
           </button>
+          <div>
+            {
+              blog.status === BlogStatus.PUBLISH && <button
+                onClick={() => handleStatusChange(blog._id)}
+                className="text-green-600 hover:text-green-700 p-2 rounded-full hover:bg-green-100 dark:hover:bg-green-900/30 transition-all duration-200"
+                title="Unpublish blog"
+              >
+                <TiTick size={20} />
+              </button>
+            }
+
+            {blog.status === BlogStatus.UNPUBLISH && <button
+              onClick={() => handleStatusChange(blog._id)}
+              className="text-red-600 hover:text-red-700 p-2 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 transition-all duration-200"
+              title="Publish blog"
+            >
+              <BiX size={20} />
+            </button>}
+          </div>
         </div>
       )
     }
@@ -161,15 +233,12 @@ const BlogList: React.FC = () => {
     <>
       <Card title='Blogs'>
         <div>
-          <div className="mb-4 flex items-center justify-between">
-            <p className="text-gray-600 dark:text-gray-400">
-              Manage your blog posts and articles
-            </p>
-            <a 
-              href="/admin/blogs/create" 
+          <div className="mb-4 flex items-center justify-end">
+            <a
+              href="/admin/blogs/create"
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors"
             >
-              Create New Post
+              Create New Blog
             </a>
           </div>
 
