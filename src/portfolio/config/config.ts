@@ -1,5 +1,3 @@
-import { config } from "../../config/config";
-
 export const EMAIL_LINK = "mailto:p.rohit.2310@gmail.com";
 export const GITHUB_LINK = "https://github.com/rohit-p-droid";
 export const TWITTER_LINK = "https://x.com/prohit2310";
@@ -15,7 +13,7 @@ export const PROJECTS_LINK = "/projects";
 export const EXPERIENCE_LINK = "/experience";
 export const CERTIFICATIONS_LINK = "/certifications";
 
-export const RESUME_LINK = `${config.API_BASE_URL}/portfolio/resume-download`;
+export const RESUME_LINK = "/assets/resume/Rohit Vasant Patil Resume.pdf";
 
 export const AUTHOR_NAME = "Rohit Patil";
 export const AUTHOR_PHOTO = "/assets/rohit.jpg";
