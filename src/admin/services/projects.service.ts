@@ -1,13 +1,17 @@
 import { apiRequest } from "../../utils/apiRequest";
 import type { ApiResponse } from "../../common/types";
-import type { Project } from "../pages/projects/ProjectsList";
+import type { Project } from "../pages/projects";
 
 export interface ProjectsQueryParams {
   page?: number;
   limit?: number;
   title?: string;
-  status?: 'active' | 'completed' | 'draft' | 'all';
   search?: string;
+}
+
+export enum ProjectStatus {
+    ACTIVE = 'Active',
+    INACTIVE = 'Inactive',
 }
 
 export interface ProjectsApiResponse {
@@ -21,25 +25,36 @@ export interface ProjectsApiResponse {
 }
 
 export const getProjects = async (params: ProjectsQueryParams = {}): Promise<ProjectsApiResponse> => {
-  // Build query string
   const queryParams = new URLSearchParams();
-  
+
   if (params.page) queryParams.append('page', params.page.toString());
   if (params.limit) queryParams.append('limit', params.limit.toString());
   if (params.title) queryParams.append('title', params.title);
-  if (params.status && params.status !== 'all') queryParams.append('status', params.status);
   if (params.search) queryParams.append('search', params.search);
 
   const queryString = queryParams.toString();
   const url = `/project/get${queryString ? `?${queryString}` : ''}`;
 
-  const response: ApiResponse<ProjectsApiResponse> = await apiRequest({
+  const response: ApiResponse<any> = await apiRequest({
     url,
     method: "GET"
   });
 
   if (!response.data) throw new Error("Projects data not found");
-  return response.data;
+
+  const { projects, page, limit, total } = response.data;
+  const limitNum = typeof limit === "string" ? parseInt(limit) : limit;
+  const totalPages = Math.ceil(total / limitNum);
+
+  return {
+    projects,
+    pagination: {
+      total,
+      page,
+      limit: limitNum,
+      totalPages
+    }
+  }
 };
 
 export const createProject = async (projectData: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> => {

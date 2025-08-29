@@ -1,14 +1,15 @@
 import { BiX } from 'react-icons/bi';
 import { TiTick } from 'react-icons/ti';
+import { Link } from 'react-router-dom';
 import Alert from '../../components/Alert';
 import Card from '../../components/Card/Card';
+import { formatDate } from '../../../common/utils';
 import React, { useState, useEffect } from 'react';
 import { BsPencilSquare, BsTrash } from 'react-icons/bs';
 import { useConfirmation, useAlert } from '../../hooks/useModal';
 import DataTable, { type Column } from '../../components/DataTable';
 import ConfirmationDialog from '../../components/ConfirmationDialog';
 import { getBlogs, deleteBlog, type Blog, type BlogsQueryParams, BlogStatus, changeBlogStatus } from '../../services/blog.service';
-import { formatDate } from '../../../common/utils';
 
 const BlogList: React.FC = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -234,12 +235,12 @@ const BlogList: React.FC = () => {
       <Card title='Blogs'>
         <div>
           <div className="mb-4 flex items-center justify-end">
-            <a
-              href="/admin/blogs/create"
+            <Link
+              to="/admin/blogs/create"
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors"
             >
               Create New Blog
-            </a>
+            </Link>
           </div>
 
           <DataTable
