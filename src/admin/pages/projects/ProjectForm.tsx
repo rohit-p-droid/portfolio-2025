@@ -118,26 +118,24 @@ const ProjectForm: React.FC = () => {
         throw new Error('At least one technology is required');
       }
 
-      const projectData: {
-        title: string;
-        description: string;
-        tech: string[];
-        image?: string | null;
-        live?: string | null;
-        github?: string | null;
-      } = {
+      const projectData = {
         title: formData.title.trim(),
         description: formData.description.trim(),
         tech: formData.tech,
-        image: formData.image?.trim() || null,
-        live: formData.live?.trim() || null,
-        github: formData.github?.trim() || null
+        image: formData.image?.trim() || undefined,
+        live: formData.live?.trim() || undefined,
+        github: formData.github?.trim() || ""
       };
 
       if (isEditMode && id) {
         await updateProject(id, projectData);
       } else {
-        await createProject(projectData);
+        // For create, we need to include required fields
+        const createData = {
+          ...projectData,
+          status: "Active" // Add default status
+        };
+        await createProject(createData);
       }
       
       // Redirect to projects list
