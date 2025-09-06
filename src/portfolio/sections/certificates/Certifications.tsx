@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { FaCertificate } from "react-icons/fa";
-import { UseCertificates } from "../../hooks/portfolio.hook";
 import { Loader } from "../../components";
+import { FaCertificate } from "react-icons/fa";
+import { formatDate } from "../../../common/utils";
+import { UseCertificates } from "../../hooks/portfolio.hook";
 
 
 const Certifications = () => {
@@ -56,7 +57,7 @@ const Certifications = () => {
                   </h3>
 
                   <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                    {cert.date}
+                    {formatDate(cert.date)}
                   </p>
 
                   {cert?.link && (

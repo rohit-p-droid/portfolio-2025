@@ -8,10 +8,11 @@ import { formatDate } from "../../../common/utils";
 
 import { Loader } from "../../components";
 import { UseBlogDetail } from "../../hooks/blog.hook";
+import SmartTextRendere from "../../components/SmartTextRender";
 
 const BlogOverview = () => {
   const { slug } = useParams();
-  const {data: blogPost, isLoading} = UseBlogDetail(slug);
+  const { data: blogPost, isLoading } = UseBlogDetail(slug);
   // const relatedBlogs: any = [];
 
   if (isLoading) {
@@ -88,13 +89,9 @@ const BlogOverview = () => {
           className="mb-16"
         >
           <div className="prose prose-lg dark:prose-invert max-w-none text-gray-900 dark:text-white">
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 font-medium leading-relaxed">
-              {blogPost.description}
-            </p>
-
-            {/* Render HTML content */}
-            <div
-              dangerouslySetInnerHTML={{ __html: blogPost.content }}
+            {/* Render blog content */}
+            <SmartTextRendere
+              text={blogPost.content}
               className="blog-content"
             />
           </div>

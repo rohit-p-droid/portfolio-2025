@@ -18,7 +18,7 @@ const Loader = () => {
       const randomMsg =
         funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
       setMessage(randomMsg);
-    }, 3000);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
