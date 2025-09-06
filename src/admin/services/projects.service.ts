@@ -1,6 +1,6 @@
 import { apiRequest } from "../../utils/apiRequest";
 import type { ApiResponse } from "../../common/types";
-import type { Project } from "../pages/projects";
+import type { Project } from "../pages/projects/ProjectsList";
 
 export interface ProjectsQueryParams {
   page?: number;
@@ -57,7 +57,7 @@ export const getProjects = async (params: ProjectsQueryParams = {}): Promise<Pro
   }
 };
 
-export const createProject = async (projectData: Omit<Project, 'id' | 'createdAt' | 'updatedAt'>): Promise<Project> => {
+export const createProject = async (projectData: Omit<Project, '_id' | 'createdAt'>): Promise<Project> => {
   const response: ApiResponse<Project> = await apiRequest({
     url: "/project/create",
     method: "POST",
@@ -68,7 +68,7 @@ export const createProject = async (projectData: Omit<Project, 'id' | 'createdAt
   return response.data;
 };
 
-export const updateProject = async (id: string, projectData: Partial<Omit<Project, 'id' | 'createdAt' | 'updatedAt'>>): Promise<Project> => {
+export const updateProject = async (id: string, projectData: Partial<Omit<Project, '_id' | 'createdAt'>>): Promise<Project> => {
   const response: ApiResponse<Project> = await apiRequest({
     url: `/project/update/${id}`,
     method: "PUT",
