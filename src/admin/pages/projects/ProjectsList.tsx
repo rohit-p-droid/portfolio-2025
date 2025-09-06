@@ -17,6 +17,8 @@ export interface Project {
 	description: string;
 	tech: string[];
 	status: string;
+	image?: string;
+	live?: string;
 	github: string;
 	createdAt: string;
 }
