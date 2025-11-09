@@ -28,7 +28,6 @@ export interface SkillsApiResponse {
 }
 
 export const getSkills = async (params: SkillsQueryParams = {}): Promise<SkillsApiResponse> => {
-  // Build query string
   const queryParams = new URLSearchParams();
   
   if (params.page) queryParams.append('page', params.page.toString());
@@ -37,7 +36,7 @@ export const getSkills = async (params: SkillsQueryParams = {}): Promise<SkillsA
   if (params.search) queryParams.append('search', params.search);
 
   const queryString = queryParams.toString();
-  const url = `/portfolio/skill${queryString ? `?${queryString}` : ''}`;
+  const url = `/portfolio/list-skill${queryString ? `?${queryString}` : ''}`;
 
   const response: ApiResponse<SkillsApiResponse> = await apiRequest({
     url,

@@ -1,14 +1,13 @@
 import "./BlogOverview.css";
 import { motion } from "framer-motion";
+import { Loader } from "../../components";
 import BlogNotFound from "./BlogNotFound";
 import { Link, useParams } from "react-router-dom";
-import { HOME_LINK, CONTACT_LINK, BLOG_LINK } from "../../config/config";
-import { FaArrowLeft, FaCalendar, FaClock, FaTags } from "react-icons/fa";
 import { formatDate } from "../../../common/utils";
-
-import { Loader } from "../../components";
 import { UseBlogDetail } from "../../hooks/blog.hook";
 import SmartTextRendere from "../../components/SmartTextRender";
+import { HOME_LINK, CONTACT_LINK, BLOG_LINK } from "../../config/config";
+import { FaArrowLeft, FaCalendar, FaClock, FaTags } from "react-icons/fa";
 
 const BlogOverview = () => {
   const { slug } = useParams();

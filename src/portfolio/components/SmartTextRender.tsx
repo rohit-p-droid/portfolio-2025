@@ -2,6 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
+import './SmartTextRenderer.css';
 
 interface SmartTextRendererProps {
     text: string;
@@ -21,19 +22,19 @@ const SmartTextRendere: React.FC<SmartTextRendererProps> = ({
         }
 
         const markdownPatterns = [
-            /^#{1,6}\s+/m,
-            /\*\*.*?\*\*/,
-            /\*.*?\*/,
-            /\[.*?\]\(.*?\)/,
-            /```[\s\S]*?```/,
-            /`.*?`/,
-            /^\* /m,
-            /^\d+\. /m,
-            /^> /m,
-            /!\[.*?\]\(.*?\)/,
-            /^\|.*\|.*\|/m,
-            /---+/,
-            /~~.*?~~/
+            /^#{1,6}\s+/m,        // Headers
+            /\*\*.*?\*\*/,        // Bold
+            /\*.*?\*/,            // Italic
+            /\[.*?\]\(.*?\)/,     // Links
+            /```[\s\S]*?```/,     // Code blocks
+            /`.*?`/,              // Inline code
+            /^\* /m,              // Unordered list
+            /^\d+\. /m,           // Ordered list
+            /^> /m,               // Blockquotes
+            /!\[.*?\]\(.*?\)/,    // Images
+            /^\|.*\|.*\|/m,       // Tables
+            /---+/,               // Horizontal rules
+            /~~.*?~~/             // Strikethrough
         ];
 
         const hasMarkdown = markdownPatterns.some(pattern => pattern.test(content));
@@ -46,21 +47,25 @@ const SmartTextRendere: React.FC<SmartTextRendererProps> = ({
         switch (contentType) {
             case 'html':
                 return (
-
-                    <div>
-                        <div
-                            dangerouslySetInnerHTML={{ __html: text }}
-                            className={`${className}`}
-                        />
+                    <div className={`smart-text-html ${className}`}>
+                        <div dangerouslySetInnerHTML={{ __html: text }} />
                     </div>
                 );
 
             case 'markdown':
                 return (
-                    <div className={`${className}`}>
+                    <div className={`smart-text-renderer ${className}`}>
                         <ReactMarkdown
                             remarkPlugins={[remarkGfm]}
                             rehypePlugins={[rehypeRaw]}
+                            components={{
+                                // Tables need custom wrapper for styling
+                                table: ({ children }) => (
+                                    <div className="table-container">
+                                        <table>{children}</table>
+                                    </div>
+                                ),
+                            }}
                         >
                             {text}
                         </ReactMarkdown>
@@ -70,7 +75,7 @@ const SmartTextRendere: React.FC<SmartTextRendererProps> = ({
             case 'plain':
             default:
                 return (
-                    <div className={`whitespace-pre-wrap ${className}`}>
+                    <div className={`smart-text-plain ${className}`}>
                         {text.split('\n').map((line, index) => (
                             <React.Fragment key={index}>
                                 {line}
