@@ -1,0 +1,31 @@
+# rohitpatil.tech
+
+## Full Stack Developer Portfolio
+
+**Name:** Rohit Patil  
+**Website:** https://rohitpatil.tech  
+**Email:** p.rohit.2310@gmail.com  
+**LinkedIn:** https://www.linkedin.com/in/prohit23/  
+**GitHub:** https://github.com/rohit-p-droid  
+
+### About
+Full Stack Developer skilled in Python, PHP, Java, JavaScript, React, NestJS, Django, Laravel. Expert in cybersecurity, DevOps, and microservices architecture.
+
+### Technologies
+- **Frontend:** React, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS
+- **Backend:** NestJS, Django, Laravel, Node.js
+- **Languages:** Python, PHP, Java, JavaScript, TypeScript
+- **Databases:** MongoDB, PostgreSQL, MySQL
+- **DevOps:** Docker, AWS, CI/CD
+- **Security:** Cybersecurity, Web Security, System Security
+
+### Services
+- Full Stack Web Development
+- API Development
+- System Architecture Design
+- Cybersecurity Consulting
+- DevOps Implementation
+- Technical Consulting
+
+---
+© 2025 Rohit Patil. All rights reserved.
