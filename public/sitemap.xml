@@ -14,6 +14,13 @@
 </url>
 
 <url>
+  <loc>https://rohitpatil.tech/blog</loc>
+  <lastmod>2025-11-09T10:07:51+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.95</priority>
+</url>
+
+<url>
   <loc>https://rohitpatil.tech/about</loc>
   <lastmod>2025-11-09T10:07:51+00:00</lastmod>
   <changefreq>monthly</changefreq>
@@ -46,13 +53,6 @@
   <lastmod>2025-11-09T10:07:51+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.70</priority>
-</url>
-
-<url>
-  <loc>https://rohitpatil.tech/blog</loc>
-  <lastmod>2025-11-09T10:07:51+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.85</priority>
 </url>
 
 <url>

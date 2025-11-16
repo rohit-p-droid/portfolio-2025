@@ -23,6 +23,32 @@
   <!-- Canonical URL -->
   <link rel="canonical" href="https://rohitpatil.tech/" />
 
+  <!-- Preload critical resources for better performance -->
+  <link rel="preload" href="/src/main.tsx" as="script" />
+  <link rel="preload" href="/assets/rohit.jpg" as="image" />
+  <link rel="preload" href="/src/index.css" as="style" />
+  
+  <!-- Critical resource hints -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Prefetch API endpoints for faster data loading -->
+  <link rel="dns-prefetch" href="//api.rohitpatil.tech" />
+  <link rel="preconnect" href="https://api.rohitpatil.tech" crossorigin />
+  
+  <!-- Module preload for critical chunks -->
+  <link rel="modulepreload" href="/src/main.tsx" />
+  <link rel="modulepreload" href="/src/portfolio/App.tsx" />
+  
+  <!-- Critical CSS injection point (will be replaced by Vite) -->
+  <style>
+    /* Critical CSS for faster FCP */
+    html { font-family: system-ui, -apple-system, sans-serif; }
+    body { margin: 0; background: #f8fafc; }
+    #root { min-height: 100vh; }
+    .loading { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  </style>
+
   <!-- Open Graph Tags -->
   <meta property="og:title" content="Rohit Patil | Full Stack Developer | Exploring AI/ML & DevOps | Cybersecurity" />
   <meta property="og:description"
