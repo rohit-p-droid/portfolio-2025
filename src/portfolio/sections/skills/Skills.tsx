@@ -1,21 +1,18 @@
 import { motion } from "framer-motion";
 import { UseSkills } from "../../hooks/portfolio.hook";
 import { Loader } from "../../components";
-import { fadeInUp, simpleHover, MOTION_CONFIG } from "../../utils/motionConfig";
 
 const cardVariants = {
-    hidden: { opacity: 0, y: 10 },
+    hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
         opacity: 1,
         y: 0,
         transition: {
-            delay: i * 0.05, // Reduced delay
-            duration: MOTION_CONFIG.duration.fast,
+            delay: i * 0.1,
+            duration: 0.5,
         },
     }),
-};
-
-const Skills = () => {
+}; const Skills = () => {
     const { data: skills, isLoading, isError } = UseSkills();
 
     if (isLoading) {
@@ -87,8 +84,9 @@ const Skills = () => {
                                 return (
                                     <motion.div
                                         key={skill.name}
-                                        whileHover={simpleHover}
-                                        className="flex flex-col items-center gap-2 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 w-32 text-center border border-gray-200 dark:border-gray-600"
+                                        whileHover={{ y: -5, scale: 1.05 }}
+                                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                        className="flex flex-col items-center gap-2 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-32 text-center border border-gray-200 dark:border-gray-600"
                                     >
                                         <div
                                             className="w-12 h-12 flex items-center justify-center overflow-hidden"

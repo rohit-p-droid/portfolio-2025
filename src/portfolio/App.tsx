@@ -1,7 +1,7 @@
 import './App.css';
 import { Footer } from './sections';
 import { Outlet } from 'react-router-dom';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import ScrollToTop from '../components/ScrollToTop';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeButton, ScrollToTopButton, FloatingMenu } from './components';
@@ -17,21 +17,18 @@ function App() {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
-  // Memoize QueryClient to prevent recreation
-  const queryClient = useMemo(() => new QueryClient({
+  const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 10 * 60 * 1000, // 10 minutes - increased for better caching
-        gcTime: 15 * 60 * 1000, // 15 minutes
+        staleTime: 5 * 60 * 1000, // 5 minutes
+        gcTime: 10 * 60 * 1000, // 10 minutes (was cacheTime)
         refetchOnWindowFocus: false,
         refetchOnMount: false,
         refetchOnReconnect: false,
         retry: 1,
-        // Enable background refetch for fresh data
-        refetchInterval: 30 * 60 * 1000, // 30 minutes
       },
     },
-  }), []);
+  });
 
   return (
     <>

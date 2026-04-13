@@ -3,11 +3,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 import {
-    FaProjectDiagram,
-    FaBlog,
+  FaProjectDiagram,
+  FaBlog,
 } from "react-icons/fa";
 import { PROJECTS_LINK, BLOG_LINK } from "../../config/config";
-import { fadeInUp, simpleHover, MOTION_CONFIG } from "../../utils/motionConfig";
 
 const cards = [
     {
