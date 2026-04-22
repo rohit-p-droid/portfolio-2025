@@ -1,16 +1,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { EMAIL_LINK, LINKEDIN_LINK, GITHUB_LINK, EMAIL } from "../../config/config";
-import { sendContactMessage, type ContactFormData } from "../../services/contact.service";
+import emailjs from "emailjs-com";
 import { FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane, FaSpinner } from "react-icons/fa";
+import { config } from "../../../config/config";
+
+const SERVICE_ID = config.EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = config.EMAILJS_TEMPLATE_ID;
+const USER_ID = config.EMAILJS_USER_ID;
 
 const Contact = () => {
-  const [formData, setFormData] = useState<ContactFormData>({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -26,7 +31,7 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    sendContactMessage(formData)
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, USER_ID)
       .then(() => {
         setShowSuccess(true);
         setFormData({ name: '', email: '', message: '' });
@@ -101,7 +106,7 @@ const Contact = () => {
         )}
 
         {/* Contact Form */}
-        <motion.form
+        {/* <motion.form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -111,33 +116,33 @@ const Contact = () => {
           <div className="grid sm:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Name</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
                 required
                 disabled={isLoading}
-                className="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity" 
+                className="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
               />
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Email</label>
-              <input 
-                type="email" 
+              <input
+                type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
                 required
                 disabled={isLoading}
-                className="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity" 
+                className="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
               />
             </div>
           </div>
           <div>
             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Message</label>
-            <textarea 
-              rows={5} 
+            <textarea
+              rows={5}
               name="message"
               value={formData.message}
               onChange={handleInputChange}
@@ -146,8 +151,8 @@ const Contact = () => {
               className="w-full px-4 py-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity resize-none"
             ></textarea>
           </div>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={isLoading}
             className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-3 rounded-md font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -163,7 +168,7 @@ const Contact = () => {
               </>
             )}
           </button>
-        </motion.form>
+        </motion.form> */}
       </div>
     </section>
   );

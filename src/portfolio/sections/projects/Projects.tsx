@@ -1,17 +1,14 @@
 import { motion } from "framer-motion";
+import { projectsData as projects } from "./projectsData";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import { Loader } from "../../components";
-import { UseProjects } from "../../hooks/project.hook";
 
 const Projects = () => {
-  const { data: projects, isLoading } = UseProjects();
-  console.log(projects)
+
   return (
     <section
       id="projects"
       className="px-6 sm:px-12 py-24 bg-gradient-to-br from-blue-50 via-cyan-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black text-gray-900 dark:text-white transition-colors duration-300"
     >
-      {isLoading && <Loader />}
       <div className="max-w-6xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

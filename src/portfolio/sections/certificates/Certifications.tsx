@@ -1,19 +1,14 @@
 import { motion } from "framer-motion";
-import { Loader } from "../../components";
 import { FaCertificate } from "react-icons/fa";
 import { formatDate } from "../../../common/utils";
-import { UseCertificates } from "../../hooks/portfolio.hook";
-
+import { certificatesData as certifications } from "./certificatesData";
 
 const Certifications = () => {
-  const { data: certifications, isLoading } = UseCertificates();
-
   return (
     <section
       id="certifications"
       className="px-6 sm:px-12 py-24 bg-gradient-to-br from-blue-50 via-cyan-50 to-white dark:from-black dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white transition-colors duration-300"
     >
-      {isLoading && <Loader />}
       <div className="max-w-6xl mx-auto text-center space-y-14">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

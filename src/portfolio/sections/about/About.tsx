@@ -1,21 +1,10 @@
 import { motion } from "framer-motion";
+import { aboutData as aboutContent } from "./aboutData";
 import { FaDownload, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { EMAIL_LINK, GITHUB_LINK, LINKEDIN_LINK, RESUME_LINK } from "../../config/config";
-import { UseAboutSection } from "../../hooks/portfolio.hook";
-import { Loader } from "../../components";
 
 const About = () => {
-  const { data: aboutData, isLoading } = UseAboutSection();
-
-  const aboutContent = {
-    title: aboutData?.title || "",
-    photo: aboutData?.photo || "",
-    paragraphs: aboutData?.paragraphs || [],
-    experienceCount: aboutData?.experienceCount || "",
-    projectsCount: aboutData?.projectsCount || "",
-    technologyCount: aboutData?.technologyCount || "",
-  }
-
+  
   const socialLinks = [
     {
       icon: <FaGithub className="text-xl" />,
@@ -42,7 +31,6 @@ const About = () => {
       id="about"
       className="px-6 sm:px-12 py-24 bg-gradient-to-b from-cyan-100 via-blue-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black text-gray-800 dark:text-white transition-colors duration-400 relative overflow-hidden"
     >
-      {isLoading && <Loader />}
 
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 dark:bg-blue-900 rounded-full opacity-10 -translate-y-48 translate-x-48"></div>

@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const router = createBrowserRouter([
   portfolioRoutes,
-  adminRoutes
+  // adminRoutes
 ])
 
 const rootElement = document.getElementById('root');

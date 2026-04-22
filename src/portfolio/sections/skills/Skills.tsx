@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { UseSkills } from "../../hooks/portfolio.hook";
-import { Loader } from "../../components";
+import { skillsData as skills } from "./skillsData";
 
 const cardVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -13,28 +12,6 @@ const cardVariants = {
         },
     }),
 }; const Skills = () => {
-    const { data: skills, isLoading, isError } = UseSkills();
-
-    if (isLoading) {
-        return (
-            <section className="py-24 sm:px-12 px-6 bg-gray-50 dark:bg-gray-800">
-                <Loader />
-            </section>
-        );
-    }
-
-    if (isError || !skills) {
-        return (
-            <section className="py-24 sm:px-12 px-6 bg-gray-50 dark:bg-gray-800">
-                <div className="max-w-7xl mx-auto text-center">
-                    <p className="text-red-600 dark:text-red-400">
-                        Error loading skills data
-                    </p>
-                </div>
-            </section>
-        );
-    }
-
     return (
         <section
             id="skills"
@@ -75,11 +52,25 @@ const cardVariants = {
                         </h3>
                         <div className="flex flex-wrap justify-start gap-6 md:ml-45">
                             {skillCategory.items.map((skill) => {
-                                // Process SVG to ensure proper sizing
-                                const processedIcon = skill.icon
-                                    .replace(/width="[^"]*"/g, 'width="48"')
-                                    .replace(/height="[^"]*"/g, 'height="48"')
-                                    .replace(/className="[^"]*"/g, 'className="w-12 h-12"');
+                                const isPath = !skill.icon.trim().startsWith('<');
+
+                                const iconElement = isPath ? (
+                                    <img
+                                        src={skill.icon}
+                                        alt={`${skill.name} logo`}
+                                        className="w-12 h-12 object-contain"
+                                    />
+                                ) : (
+                                    <div
+                                        className="w-12 h-12 flex items-center justify-center overflow-hidden"
+                                        dangerouslySetInnerHTML={{
+                                            __html: skill.icon
+                                                .replace(/width="[^"]*"/g, 'width="48"')
+                                                .replace(/height="[^"]*"/g, 'height="48"')
+                                                .replace(/className="[^"]*"/g, 'className="w-12 h-12"')
+                                        }}
+                                    />
+                                );
 
                                 return (
                                     <motion.div
@@ -88,10 +79,7 @@ const cardVariants = {
                                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                                         className="flex flex-col items-center gap-2 p-4 bg-white dark:bg-gray-700 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-32 text-center border border-gray-200 dark:border-gray-600"
                                     >
-                                        <div
-                                            className="w-12 h-12 flex items-center justify-center overflow-hidden"
-                                            dangerouslySetInnerHTML={{ __html: processedIcon }}
-                                        />
+                                        {iconElement}
                                         <span className="font-semibold text-gray-700 dark:text-gray-300 text-sm">
                                             {skill.name}
                                         </span>
