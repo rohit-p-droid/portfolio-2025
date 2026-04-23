@@ -37,15 +37,16 @@ export async function apiRequest<T>({
             options.body = JSON.stringify(data);
         }
 
-        const fullUrl = `${config.API_BASE_URL}${url}`
-        const response = await fetch(fullUrl, options);
+        // const fullUrl = `${config.API_BASE_URL}${url}`
+        // const response = await fetch(fullUrl, options);
 
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw { status: response.status, ...errorData };
-        }
+        // if (!response.ok) {
+        //     const errorData = await response.json().catch(() => ({}));
+        //     throw { status: response.status, ...errorData };
+        // }
 
-        return await response.json();
+        // return await response.json();
+        return Promise.resolve({} as T);
     } catch (error) {
         throw error;
     }

@@ -1,17 +1,13 @@
 import { motion } from "framer-motion";
-import { Loader } from "../../components";
 import { FaBriefcase } from "react-icons/fa";
-import { UseExperience } from "../../hooks/portfolio.hook";
+import { experienceData as experience } from "./experienceData";
 
 const Experience = () => {
-  const { data: experience, isLoading } = UseExperience();
-  console.log(experience)
   return (
     <section
       id="experience"
       className="px-6 sm:px-12 py-24 bg-gradient-to-br from-blue-50 via-cyan-50 to-white dark:from-black dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white transition-colors duration-300"
     >
-      {isLoading && <Loader />}
       <div className="max-w-5xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

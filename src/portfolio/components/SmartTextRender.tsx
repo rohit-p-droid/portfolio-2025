@@ -44,6 +44,25 @@ const SmartTextRendere: React.FC<SmartTextRendererProps> = ({
     const contentType = detectContentType(text);
 
     const renderContent = () => {
+        console.log(contentType)
+        return (
+                    <div className={`smart-text-renderer ${className}`}>
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            rehypePlugins={[rehypeRaw]}
+                            components={{
+                                // Tables need custom wrapper for styling
+                                table: ({ children }) => (
+                                    <div className="table-container">
+                                        <table>{children}</table>
+                                    </div>
+                                ),
+                            }}
+                        >
+                            {text}
+                        </ReactMarkdown>
+                    </div>
+                );
         switch (contentType) {
             case 'html':
                 return (

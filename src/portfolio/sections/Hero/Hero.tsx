@@ -1,22 +1,10 @@
+import { heroData } from "./heroData";
 import { motion } from "framer-motion";
-import { Loader } from "../../components";
 import { Typewriter } from "react-simple-typewriter";
-import { UseHeroSection } from "../../hooks/portfolio.hook";
 import { PROJECTS_LINK, RESUME_LINK } from "../../config/config";
 import { fadeInUp, fadeIn, MOTION_CONFIG } from "../../utils/motionConfig";
 
 const Hero = () => {
-    const { data: heroSection, isLoading } = UseHeroSection();
-
-    const heroData = {
-        name: heroSection?.name || "",
-        role: heroSection?.role || "",
-        tagline: heroSection?.tagline || "",
-        description: heroSection?.description || "",
-        photo: heroSection?.photo || ""
-    };
-
-    if (isLoading) return <Loader />;
 
     return (
         <section

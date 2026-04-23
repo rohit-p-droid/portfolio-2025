@@ -4,23 +4,73 @@ import { Loader } from "../../components";
 import BlogNotFound from "./BlogNotFound";
 import { Link, useParams } from "react-router-dom";
 import { formatDate } from "../../../common/utils";
-import { UseBlogDetail } from "../../hooks/blog.hook";
 import SmartTextRendere from "../../components/SmartTextRender";
 import { HOME_LINK, CONTACT_LINK, BLOG_LINK } from "../../config/config";
 import { FaArrowLeft, FaCalendar, FaClock, FaTags } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
+
+import { blogsData } from "../../sections/blog/blogsData";
+export interface BlogDetailView {
+  title: string;
+  description: string;
+  content?: string;
+  tags: string[];
+  date: string;
+  readTime: number;
+  slug: string;
+}
+
+const blogModules = import.meta.glob("./posts/*.md", {
+  query: "?raw",
+  import: "default",
+});
 
 const BlogOverview = () => {
   const { slug } = useParams();
-  const { data: blogPost, isLoading } = UseBlogDetail(slug);
-  // const relatedBlogs: any = [];
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  const [isLoading, setIsLoading] = useState(true);
+  const [blogContent, setBlogContent] = useState("");
+  const [blogPost, setBlogPost] = useState<BlogDetailView | null>(null);
 
-  if (!isLoading && !blogPost) {
-    return <BlogNotFound />;
-  }
+  useEffect(() => {
+    const loadBlog = async () => {
+      setIsLoading(true);
+
+      const selectedBlog = blogsData.find((blog) => blog.slug === slug);
+
+      if (!selectedBlog) {
+        setBlogPost(null);
+        setIsLoading(false);
+        return;
+      }
+
+      setBlogPost(selectedBlog as BlogDetailView);
+
+      try {
+        const path = `./posts/${slug}.md`;
+        if (blogModules[path]) {
+          const content = (await blogModules[path]()) as string;
+          setBlogContent(content);
+        } else {
+          setBlogContent("# Blog content not found\n\nThe requested blog post could not be loaded.");
+        }
+      } catch (error) {
+        console.error("Error loading blog markdown:", error);
+        setBlogContent("# Error loading blog\n\nThere was an error loading the blog content.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadBlog();
+  }, [slug]);
+
+  if (isLoading) return <Loader />;
+
+  if (!isLoading && !blogPost) return <BlogNotFound />;
 
   if (!blogPost) return <BlogNotFound />;
 
@@ -89,42 +139,25 @@ const BlogOverview = () => {
         >
           <div className="prose prose-lg dark:prose-invert max-w-none text-gray-900 dark:text-white">
             {/* Render blog content */}
-            <SmartTextRendere
-              text={blogPost.content}
-              className="blog-content"
-            />
+            <div className={`smart-text-renderer`}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeRaw]}
+                components={{
+                  // Tables need custom wrapper for styling
+                  table: ({ children }) => (
+                    <div className="table-container">
+                      <table>{children}</table>
+                    </div>
+                  ),
+                }}
+              >
+                {blogContent}
+              </ReactMarkdown>
+            </div>
           </div>
         </motion.div>
 
-        {/* Related Blogs */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-12"
-        >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Related Articles</h3>
-          <div className="grid gap-6 md:grid-cols-2">
-            {relatedBlogs?.map((relatedBlog: any) => (
-              <Link
-                key={relatedBlog.id}
-                to={`/blog/${relatedBlog.id}`}
-                className="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1"
-              >
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {relatedBlog.title}
-                </h4>
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
-                  {relatedBlog.excerpt}
-                </p>
-                <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-                  <span>📅 {formatDate(relatedBlog.date)}</span>
-                  <span>⏱️ {relatedBlog.readTime}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </motion.div> */}
 
         {/* Navigation Links */}
         <motion.div
