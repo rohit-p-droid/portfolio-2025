@@ -104,3 +104,40 @@
 .dark .blog-content a:hover {
   color: rgb(96 165 250);
 }
+
+/* Custom scrollbar styling for code blocks */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Custom highlight.js styling overrides */
+.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Make tables zebra striped and clean */
+.table-container table tr:nth-child(even) {
+  background-color: rgba(243, 244, 246, 0.3);
+}
+.dark .table-container table tr:nth-child(even) {
+  background-color: rgba(31, 41, 55, 0.3);
+}
+.table-container table tr:hover {
+  background-color: rgba(243, 244, 246, 0.6);
+}
+.dark .table-container table tr:hover {
+  background-color: rgba(31, 41, 55, 0.6);
+}
+
