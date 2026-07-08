@@ -86,9 +86,9 @@ const Blog = () => {
 
           {/* Horizontal Tags Scroll Menu */}
           <div className="relative py-2 border-t border-b border-gray-200/60 dark:border-gray-800/80">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 w-full min-w-0">
               <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 select-none shrink-0">Tags:</span>
-              <div className="flex overflow-x-auto scrollbar-none gap-2 py-1 select-none w-full">
+              <div className="flex-1 flex overflow-x-auto scrollbar-none gap-2 py-1 select-none min-w-0">
                 {allTags.map((tag) => (
                   <button
                     key={tag}

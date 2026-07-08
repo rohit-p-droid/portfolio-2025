@@ -1,5 +1,24 @@
 export const blogsData = [
     {
+        title: "MCP Is the Missing Piece Between Your Agents and the Real World",
+        description: "Why the Model Context Protocol matters even if you're already building with LangGraph, RAG pipelines, and autonomous agents. Learn how MCP standardizes tools, resources, and prompts into reusable agent infrastructure.",
+        tags: [
+            "MCP",
+            "AI",
+            "Agents",
+            "LangGraph",
+            "RAG",
+            "LLM",
+            "Anthropic",
+            "AgentEngineering",
+            "DeveloperTools",
+            "Architecture"
+        ],
+        date: "2026-07-08T00:00:00.000Z",
+        readTime: 8,
+        slug: "mcp-missing-piece-between-agents-and-real-world"
+    },
+    {
         title: "From Single DB to Multi-Tenant in NestJS — Without Rewriting Your App",
         description: "A practical guide to building multi-tenant database isolation in NestJS using AsyncLocalStorage — no Scope.REQUEST, no per-query companyId filters, and no rewrites to your existing business logic.",
         tags: [
@@ -72,7 +91,7 @@ export const blogsData = [
         readTime: 10,
         slug: "how-to-choose-the-right-database-for-your-system-design"
     },
-     {
+    {
         title: "Introduction: The Need for Kubernetes",
         description: "Introduction to Kubernetes, it's main components and how it works, everything explained theoratically.",
         tags: [
@@ -84,7 +103,7 @@ export const blogsData = [
         readTime: 7,
         slug: "introduction-the-need-for-kubernetes-1"
     },
-     {
+    {
         title: "Docker Compose: Orchestrating Multi-Container Apps",
         description: "The core information about docker compose, what docker compose is and how we use it, to manage multiple docker containers.",
         tags: [

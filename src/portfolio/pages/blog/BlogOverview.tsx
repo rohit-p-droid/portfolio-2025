@@ -269,7 +269,7 @@ const BlogOverview = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >
-          <div className="prose prose-lg dark:prose-invert max-w-none text-gray-900 dark:text-white blog-article-content">
+          <div className="prose prose-lg dark:prose-invert max-w-none text-gray-900 dark:text-white blog-article-content blog-content">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
@@ -291,7 +291,7 @@ const BlogOverview = () => {
                   
                   return (
                     <code 
-                      className="bg-gray-100 dark:bg-gray-800/80 text-pink-600 dark:text-pink-400 px-2 py-0.5 rounded-lg text-sm font-mono border border-gray-200 dark:border-gray-700/50 shadow-sm mx-0.5 inline-block"
+                      className="bg-gray-100 dark:bg-gray-800/80 text-pink-600 dark:text-pink-400 px-2 py-0.5 rounded-lg text-sm font-mono border border-gray-200 dark:border-gray-700/50 shadow-sm mx-0.5 inline break-words"
                       {...props}
                     >
                       {children}

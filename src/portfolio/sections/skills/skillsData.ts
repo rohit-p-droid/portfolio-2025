@@ -117,6 +117,10 @@ export const skillsData = [
             {
                 name: "LangGraph",
                 icon: "/assets/skills/langgraph.svg"
+            },
+            {
+                name: "MCP (Model Context Protocol)",
+                icon: "/assets/skills/mcp.svg"
             }
         ]
     },
@@ -139,6 +143,10 @@ export const skillsData = [
             {
                 name: "Kubernetes",
                 icon: "/assets/skills/kubernetes.svg"
+            },
+            {
+                name: "Jenkins",
+                icon: "/assets/skills/Jenkins.svg"
             }
         ]
     },
