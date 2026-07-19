@@ -1,6 +1,6 @@
 import "./BlogOverview.css";
 import { motion } from "framer-motion";
-import { Loader } from "../../components";
+import { Loader, Mermaid } from "../../components";
 import BlogNotFound from "./BlogNotFound";
 import { Link, useParams } from "react-router-dom";
 import { formatDate } from "../../../common/utils";
@@ -57,7 +57,7 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
   }, [code, language]);
 
   return (
-    <div className="relative my-8 rounded-2xl overflow-hidden border border-gray-200/80 dark:border-gray-700/60 shadow-xl bg-[#282c34] font-mono text-sm max-w-full group">
+    <div className="relative my-8 rounded-2xl overflow-hidden border border-gray-200/80 dark:border-gray-700/60 shadow-xl font-mono text-sm max-w-full group" style={{ backgroundColor: '#282c34' }}>
       {/* Code Header */}
       <div className="flex items-center justify-between px-5 py-2.5 bg-gray-100 dark:bg-gray-800/80 border-b border-gray-200 dark:border-gray-700/60 text-xs text-gray-500 dark:text-gray-400 select-none">
         <div className="flex items-center gap-2">
@@ -90,10 +90,10 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
           )}
         </button>
       </div>
-      
+
       {/* Code Content */}
-      <pre className="p-5 m-0 overflow-x-auto bg-[#282c34] text-[#abb2bf] leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent max-h-[550px]">
-        <code 
+      <pre className="pt-1 pb-3 px-5 m-0 overflow-x-auto text-[#abb2bf] leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent max-h-[550px]" style={{ backgroundColor: '#282c34' }}>
+        <code
           className={`hljs language-${language} block font-mono text-[13px] md:text-sm`}
           style={{ whiteSpace: 'pre', wordSpacing: 'normal', wordBreak: 'normal' }}
           dangerouslySetInnerHTML={{ __html: highlighted }}
@@ -176,7 +176,7 @@ const BlogOverview = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-cyan-50 to-blue-50 dark:from-black dark:via-gray-800 dark:to-gray-900 transition-colors duration-300 pb-20 select-text">
       {/* Scroll Progress Bar */}
-      <div 
+      <div
         className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-600 z-50 transition-all duration-75"
         style={{ width: `${scrollProgress}%` }}
       />
@@ -274,23 +274,28 @@ const BlogOverview = () => {
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
               components={{
+                // Prevent duplicate packaging boxes and padding around custom components
+                pre: ({ children }) => <>{children}</>,
                 // Custom code snippet styling with highlighting
                 code({ node, className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || '');
                   const codeVal = String(children).replace(/\n$/, '');
                   const isInline = !match && !codeVal.includes('\n');
-                  
+
                   if (!isInline) {
+                    if (match && match[1] === 'mermaid') {
+                      return <Mermaid chart={codeVal} />;
+                    }
                     return (
-                      <CodeBlock 
-                        code={codeVal} 
-                        language={match ? match[1] : 'code'} 
+                      <CodeBlock
+                        code={codeVal}
+                        language={match ? match[1] : 'code'}
                       />
                     );
                   }
-                  
+
                   return (
-                    <code 
+                    <code
                       className="bg-gray-100 dark:bg-gray-800/80 text-pink-600 dark:text-pink-400 px-2 py-0.5 rounded-lg text-sm font-mono border border-gray-200 dark:border-gray-700/50 shadow-sm mx-0.5 inline break-words"
                       {...props}
                     >
@@ -339,10 +344,10 @@ const BlogOverview = () => {
                 p: ({ children }) => <p className="leading-relaxed my-5 text-[16px] md:text-[17px] text-gray-800 dark:text-gray-300">{children}</p>,
                 // Link custom designs
                 a: ({ href, children }) => (
-                  <a 
-                    href={href} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline underline-offset-4 decoration-2 font-medium transition-colors"
                   >
                     {children}

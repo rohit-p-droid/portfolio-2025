@@ -5,6 +5,7 @@ export const projectsData = [
         tech: ["Django", "Django Channels (WebSockets)", "Next.js", "LangGraph", "LangChain", "Chroma DB", "SQLite", "RAG"],
         image: "/assets/projects/agent-studio.png",
         github: "https://github.com/rohit-p-droid/agent-studio",
+        live: "https://drive.google.com/file/d/1V0Mz8iug9WSpRZFdZx9wdNbD58YS3etu/view?usp=sharing",
     },
     {
         title: "Mind Graph",

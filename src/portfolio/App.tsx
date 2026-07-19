@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeButton, ScrollToTopButton, FloatingMenu } from './components';
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");

@@ -1,5 +1,24 @@
 export const blogsData = [
     {
+    title: "Multi-Agent Systems: Architecture and Challenges",
+    description: "A production engineer's breakdown of how multi-agent AI systems are actually architected — orchestrators, worker agents, memory, and RAG — plus the coordination failures, hallucination compounding, latency, cost, and security issues that only show up once real traffic hits the system.",
+    tags: [
+        "MultiAgentSystems",
+        "AgenticAI",
+        "AI",
+        "Agents",
+        "SystemDesign",
+        "DistributedSystems",
+        "LLM",
+        "RAG",
+        "AgentEngineering",
+        "Architecture"
+    ],
+    date: "2026-07-19T00:00:00.000Z",
+    readTime: 12,
+    slug: "multi-agent-systems-architecture-and-challenges"
+},
+    {
         title: "MCP Is the Missing Piece Between Your Agents and the Real World",
         description: "Why the Model Context Protocol matters even if you're already building with LangGraph, RAG pipelines, and autonomous agents. Learn how MCP standardizes tools, resources, and prompts into reusable agent infrastructure.",
         tags: [

@@ -6,6 +6,7 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 import { FaCheck } from 'react-icons/fa';
 import './SmartTextRenderer.css';
+import Mermaid from './Mermaid';
 
 interface SmartTextRendererProps {
     text: string;
@@ -38,7 +39,7 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
   }, [code, language]);
 
   return (
-    <div className="relative my-6 rounded-2xl overflow-hidden border border-gray-200/80 dark:border-gray-700/60 shadow-lg bg-[#282c34] font-mono text-sm max-w-full group">
+    <div className="relative my-6 rounded-2xl overflow-hidden border border-gray-200/80 dark:border-gray-700/60 shadow-lg font-mono text-sm max-w-full group" style={{ backgroundColor: '#282c34' }}>
       {/* Code Header */}
       <div className="flex items-center justify-between px-4 py-2 bg-gray-100 dark:bg-gray-800/85 border-b border-gray-200 dark:border-gray-700/60 text-xs text-gray-500 dark:text-gray-400 select-none">
         <div className="flex items-center gap-2">
@@ -73,7 +74,7 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
       </div>
       
       {/* Code Content */}
-      <pre className="p-4 m-0 overflow-x-auto bg-[#282c34] text-[#abb2bf] leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent max-h-[500px]">
+      <pre className="pt-1 pb-3 px-4 m-0 overflow-x-auto text-[#abb2bf] leading-relaxed scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent max-h-[500px]" style={{ backgroundColor: '#282c34' }}>
         <code 
           className={`hljs language-${language} block font-mono text-[13px] md:text-sm`}
           style={{ whiteSpace: 'pre', wordSpacing: 'normal', wordBreak: 'normal' }}
@@ -94,6 +95,8 @@ const SmartTextRendere: React.FC<SmartTextRendererProps> = ({
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
                 components={{
+                    // Prevent duplicate packaging boxes and padding around custom components
+                    pre: ({ children }) => <>{children}</>,
                     // Custom code component mapping
                     code({ node, className, children, ...props }) {
                         const match = /language-(\w+)/.exec(className || '');
@@ -101,6 +104,9 @@ const SmartTextRendere: React.FC<SmartTextRendererProps> = ({
                         const isInline = !match && !codeVal.includes('\n');
                         
                         if (!isInline) {
+                            if (match && match[1] === 'mermaid') {
+                                return <Mermaid chart={codeVal} />;
+                            }
                             return (
                                 <CodeBlock 
                                     code={codeVal} 
