@@ -1,23 +1,61 @@
 export const blogsData = [
     {
-    title: "Multi-Agent Systems: Architecture and Challenges",
-    description: "A production engineer's breakdown of how multi-agent AI systems are actually architected — orchestrators, worker agents, memory, and RAG — plus the coordination failures, hallucination compounding, latency, cost, and security issues that only show up once real traffic hits the system.",
-    tags: [
-        "MultiAgentSystems",
-        "AgenticAI",
-        "AI",
-        "Agents",
-        "SystemDesign",
-        "DistributedSystems",
-        "LLM",
-        "RAG",
-        "AgentEngineering",
-        "Architecture"
-    ],
-    date: "2026-07-19T00:00:00.000Z",
-    readTime: 12,
-    slug: "multi-agent-systems-architecture-and-challenges"
-},
+        title: "GPT-Live in Production: WebRTC Audio, Server-Side RAG Over a Sideband",
+        description: "A production engineer's breakdown of shipping OpenAI's full-duplex GPT-Live model behind a real backend, splitting the audio data plane (direct browser WebRTC) from the control plane (a server-side sideband WebSocket) so client-delegated RAG, tenant isolation, and auth never touch the hot audio path.",
+        tags: [
+            "GPTLive",
+            "VoiceAI",
+            "WebRTC",
+            "RealtimeAI",
+            "RAG",
+            "SystemDesign",
+            "AgentEngineering",
+            "Architecture",
+            "OpenAI",
+            "BackendEngineering"
+        ],
+        date: "2026-09-26T00:00:00.000Z",
+        readTime: 9,
+        slug: "gpt-live-webrtc-sideband-rag"
+    },
+    {
+        title: "Agent Memory, Explained: Short-Term, Long-Term, and How to Scale It",
+        description: "A breakdown of how AI agents actually remember things, short-term context windows vs. long-term vector stores, and the tiered caching, eviction, and sharding patterns that keep memory fast and cheap once real traffic hits the system.",
+        tags: [
+            "AgentMemory",
+            "AgenticAI",
+            "AI",
+            "RAG",
+            "SystemDesign",
+            "VectorDatabase",
+            "Caching",
+            "DistributedSystems",
+            "AgentEngineering",
+            "Architecture"
+        ],
+        date: "2026-09-26T00:00:00.000Z",
+        readTime: 6,
+        slug: "agent-memory-short-term-long-term-scaling"
+    },
+    {
+        title: "Multi-Agent Systems: Architecture and Challenges",
+        description: "A production engineer's breakdown of how multi-agent AI systems are actually architected — orchestrators, worker agents, memory, and RAG — plus the coordination failures, hallucination compounding, latency, cost, and security issues that only show up once real traffic hits the system.",
+        tags: [
+            "MultiAgentSystems",
+            "AgenticAI",
+            "AI",
+            "Agents",
+            "SystemDesign",
+            "DistributedSystems",
+            "LLM",
+            "RAG",
+            "AgentEngineering",
+            "Architecture"
+        ],
+        date: "2026-07-19T00:00:00.000Z",
+        readTime: 12,
+        slug: "multi-agent-systems-architecture-and-challenges"
+    },
     {
         title: "MCP Is the Missing Piece Between Your Agents and the Real World",
         description: "Why the Model Context Protocol matters even if you're already building with LangGraph, RAG pipelines, and autonomous agents. Learn how MCP standardizes tools, resources, and prompts into reusable agent infrastructure.",
