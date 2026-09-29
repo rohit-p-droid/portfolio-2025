@@ -181,7 +181,7 @@ const BlogOverview = () => {
         style={{ width: `${scrollProgress}%` }}
       />
 
-      <div className="max-w-4xl mx-auto px-6 py-12">
+      <div className="max-w-4xl mx-auto px-6 pt-28 sm:pt-32 pb-12">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -190,10 +190,10 @@ const BlogOverview = () => {
           className="mb-8"
         >
           <Link
-            to={BLOG_LINK}
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors font-medium group"
+            to="/#blog"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border border-gray-200/80 dark:border-gray-700/80 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-all font-semibold text-xs sm:text-sm shadow-xs hover:shadow group"
           >
-            <FaArrowLeft className="text-sm transition-transform group-hover:-translate-x-1" />
+            <FaArrowLeft className="text-xs transition-transform group-hover:-translate-x-1" />
             <span>Back to Blogs</span>
           </Link>
         </motion.div>
@@ -368,7 +368,7 @@ const BlogOverview = () => {
           className="flex flex-col sm:flex-row justify-center gap-4 border-t border-gray-200/80 dark:border-gray-700/50 pt-10"
         >
           <Link
-            to={BLOG_LINK}
+            to="/#blog"
             className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-all text-base font-semibold shadow-lg hover:shadow-blue-500/20 active:scale-95 group"
           >
             <FaArrowLeft className="text-sm transition-transform group-hover:-translate-x-1" />

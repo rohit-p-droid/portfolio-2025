@@ -5,7 +5,7 @@ import { HOME_LINK, BLOG_LINK } from "../../config/config";
 
 const BlogNotFound = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-cyan-50 to-blue-50 dark:from-black dark:via-gray-800 dark:to-gray-900 transition-colors duration-300 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-white via-cyan-50 to-blue-50 dark:from-black dark:via-gray-800 dark:to-gray-900 transition-colors duration-300 flex items-center justify-center pt-24 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ const BlogNotFound = () => {
             </Link>
             
             <Link 
-              to={BLOG_LINK}
+              to="/#blog"
               className="group relative px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-105 hover:shadow-xl font-semibold flex items-center justify-center gap-3 text-lg border-2 border-gray-200 dark:border-gray-600"
             >
               <motion.span 

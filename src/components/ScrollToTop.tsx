@@ -7,24 +7,41 @@ interface ScrollToTopProps {
 }
 
 const ScrollToTop = ({ smooth = true, delay = 0 }: ScrollToTopProps = {}) => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: smooth ? 'smooth' : 'auto'
-      });
-    };
-
-    if (delay > 0) {
-      const timeoutId = setTimeout(scrollToTop, delay);
-      return () => clearTimeout(timeoutId);
+    if (hash) {
+      const id = hash.replace('#', '');
+      const timer = setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
+        } else {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: smooth ? 'smooth' : 'auto'
+          });
+        }
+      }, delay || 50);
+      return () => clearTimeout(timer);
     } else {
-      scrollToTop();
+      const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: smooth ? 'smooth' : 'auto'
+        });
+      };
+
+      if (delay > 0) {
+        const timeoutId = setTimeout(scrollToTop, delay);
+        return () => clearTimeout(timeoutId);
+      } else {
+        scrollToTop();
+      }
     }
-  }, [pathname, smooth, delay]);
+  }, [pathname, hash, smooth, delay]);
 
   return null;
 };

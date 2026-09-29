@@ -1,80 +1,80 @@
 import { motion } from "framer-motion";
-import { FaCertificate } from "react-icons/fa";
+import { FaCertificate, FaExternalLinkAlt } from "react-icons/fa";
 import { formatDate } from "../../../common/utils";
 import { certificatesData as certifications } from "./certificatesData";
+import { fadeInUp } from "../../utils/motionConfig";
 
 const Certifications = () => {
   return (
     <section
       id="certifications"
-      className="px-6 sm:px-12 py-24 bg-gradient-to-br from-blue-50 via-cyan-50 to-white dark:from-black dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white transition-colors duration-300"
+      className="px-6 sm:px-12 py-20 bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300"
     >
-      <div className="max-w-6xl mx-auto text-center space-y-14">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-4xl font-bold text-blue-700 dark:text-blue-400 flex items-center justify-center gap-3"
-        >
-          <FaCertificate className="text-blue-500 dark:text-blue-400 text-3xl" /> Certifications
-        </motion.h2>
+      <div className="max-w-6xl mx-auto space-y-14">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <motion.div
+            {...fadeInUp}
+            className="inline-block text-xs uppercase tracking-widest font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800/60"
+          >
+            Credentials & Training
+          </motion.div>
+          <motion.h2
+            {...fadeInUp}
+            className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight flex items-center justify-center gap-3"
+          >
+            <FaCertificate className="text-blue-600 dark:text-blue-400 text-2xl" />
+            Certifications
+          </motion.h2>
+          <motion.p
+            {...fadeInUp}
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+          >
+            Continuous professional learning, cybersecurity fundamentals, and industry certifications.
+          </motion.p>
+        </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* Cards Grid */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
           {certifications && certifications.length > 0 ? (
             certifications.map((cert, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: idx * 0.05 }}
-                className="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-200 hover:-translate-y-1"
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="bg-gray-50/80 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-200/80 dark:border-gray-700/80 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between text-center space-y-4"
               >
-                {/* Platform Badge */}
-                <div className="flex justify-center mb-4">
-                  <div className="px-4 py-2 bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-blue-900 dark:to-cyan-900 rounded-full">
-                    <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">
-                      {cert.platform}
-                    </span>
+                <div className="space-y-3">
+                  <div className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-100/80 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/80">
+                    {cert.platform}
                   </div>
-                </div>
-
-                {/* Certificate Icon */}
-                <div className="flex justify-center mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
-                    <FaCertificate className="text-2xl text-white" />
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="text-center space-y-3">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 leading-tight">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white leading-snug">
                     {cert.title}
                   </h3>
-
-                  <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                    {formatDate(cert.date)}
+                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium">
+                    Issued {formatDate(cert.date)}
                   </p>
+                </div>
 
-                  {cert?.link && (
+                {cert?.link && (
+                  <div>
                     <a
                       href={cert.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-sm font-semibold rounded-full hover:from-blue-700 hover:to-cyan-600 transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl shadow-xs transition-all duration-200"
                     >
-                      <span>🎓</span>
-                      <span>View Certificate</span>
+                      <span>View Credential</span>
+                      <FaExternalLinkAlt className="text-[10px]" />
                     </a>
-                  )}
-                </div>
+                  </div>
+                )}
               </motion.div>
             ))
           ) : (
-            <div className="col-span-full text-center py-12">
-              <FaCertificate className="text-6xl text-gray-400 dark:text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
-                No certifications available at the moment.
-              </p>
+            <div className="col-span-full text-center py-8 text-gray-500">
+              No certifications listed.
             </div>
           )}
         </div>
@@ -84,3 +84,4 @@ const Certifications = () => {
 };
 
 export default Certifications;
+

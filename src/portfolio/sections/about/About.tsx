@@ -1,25 +1,32 @@
 import { motion } from "framer-motion";
 import { aboutData as aboutContent } from "./aboutData";
-import { FaDownload, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaDownload, FaGithub, FaLinkedin, FaEnvelope, FaBrain, FaLayerGroup, FaServer, FaCogs, FaGraduationCap } from "react-icons/fa";
 import { EMAIL_LINK, GITHUB_LINK, LINKEDIN_LINK, RESUME_LINK } from "../../config/config";
+import { fadeInUp } from "../../utils/motionConfig";
+
+const pillarIcons = [
+  <FaBrain className="text-xl text-blue-500" />,
+  <FaLayerGroup className="text-xl text-indigo-500" />,
+  <FaServer className="text-xl text-cyan-500" />,
+  <FaCogs className="text-xl text-purple-500" />
+];
 
 const About = () => {
-  
   const socialLinks = [
     {
-      icon: <FaGithub className="text-xl" />,
+      icon: <FaGithub className="text-lg" />,
       href: GITHUB_LINK,
       label: "GitHub",
-      color: "hover:text-gray-800 dark:hover:text-gray-200"
+      color: "hover:text-gray-900 dark:hover:text-white"
     },
     {
-      icon: <FaLinkedin className="text-xl" />,
+      icon: <FaLinkedin className="text-lg" />,
       href: LINKEDIN_LINK,
       label: "LinkedIn",
       color: "hover:text-blue-600 dark:hover:text-blue-400"
     },
     {
-      icon: <FaEnvelope className="text-xl" />,
+      icon: <FaEnvelope className="text-lg" />,
       href: EMAIL_LINK,
       label: "Email",
       color: "hover:text-red-500 dark:hover:text-red-400"
@@ -29,132 +36,153 @@ const About = () => {
   return (
     <section
       id="about"
-      className="px-6 sm:px-12 py-24 bg-gradient-to-b from-cyan-100 via-blue-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black text-gray-800 dark:text-white transition-colors duration-400 relative overflow-hidden"
+      className="px-6 sm:px-12 py-20 bg-white dark:bg-gray-900 text-gray-800 dark:text-white transition-colors duration-300 relative"
     >
+      <div className="max-w-6xl mx-auto space-y-16">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <motion.div
+            {...fadeInUp}
+            className="inline-block text-xs uppercase tracking-widest font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800/60"
+          >
+            Profile & Education
+          </motion.div>
+          <motion.h2
+            {...fadeInUp}
+            className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight"
+          >
+            Engineering AI-Native Full-Stack Solutions
+          </motion.h2>
+          <motion.p
+            {...fadeInUp}
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+          >
+            {aboutContent.summary}
+          </motion.p>
+        </div>
 
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 dark:bg-blue-900 rounded-full opacity-10 -translate-y-48 translate-x-48"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-cyan-200 dark:bg-cyan-900 rounded-full opacity-10 translate-y-40 -translate-x-40"></div>
-
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-        {/* Image section with enhanced styling */}
+        {/* Metrics Grid */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="flex justify-center md:justify-start"
+          {...fadeInUp}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
         >
-          <div className="relative group">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl opacity-20 group-hover:opacity-30 transition-opacity duration-300 blur-xl"></div>
-            <img
-              src={aboutContent.photo}
-              alt="About Rohit"
-              className="relative w-80 h-80 object-cover rounded-xl shadow-2xl dark:shadow-blue-800/50 border-4 border-white dark:border-gray-700 group-hover:scale-105 transition-transform duration-300"
-            />
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl opacity-80 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">💼</span>
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800/80 dark:to-gray-800/40 border border-blue-100 dark:border-gray-700 text-center">
+            <div className="text-3xl sm:text-4xl font-extrabold text-blue-600 dark:text-blue-400 mb-1">
+              {aboutContent.experienceCount}
+            </div>
+            <div className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-300">
+              Years Production Exp.
+            </div>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-800/80 dark:to-gray-800/40 border border-indigo-100 dark:border-gray-700 text-center">
+            <div className="text-3xl sm:text-4xl font-extrabold text-indigo-600 dark:text-indigo-400 mb-1">
+              {aboutContent.documentationReduction}
+            </div>
+            <div className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-300">
+              Manual Doc Overhead Cut
+            </div>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-gray-800/80 dark:to-gray-800/40 border border-cyan-100 dark:border-gray-700 text-center">
+            <div className="text-3xl sm:text-4xl font-extrabold text-cyan-600 dark:text-cyan-400 mb-1">
+              {aboutContent.deploymentTimeReduction}
+            </div>
+            <div className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-300">
+              Deployment Time Cut
+            </div>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-800/80 dark:to-gray-800/40 border border-emerald-100 dark:border-gray-700 text-center">
+            <div className="text-3xl sm:text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 mb-1">
+              {aboutContent.focus}
+            </div>
+            <div className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-300">
+              Zero-Downtime Delivery
             </div>
           </div>
         </motion.div>
 
-        {/* Enhanced text content */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="space-y-8"
-        >
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-3xl sm:text-4xl font-bold text-blue-700 dark:text-blue-400 mb-2"
-            >
-              {aboutContent.title}
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, width: 0 }}
-              whileInView={{ opacity: 1, width: "4rem" }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="h-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
-            ></motion.div>
+        {/* Narrative, Pillars & Education */}
+        <div className="grid lg:grid-cols-12 gap-10 items-start">
+          {/* Detailed Paragraphs & Education */}
+          <div className="lg:col-span-6 space-y-5 text-gray-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed">
+            {aboutContent.paragraphs.map((para, idx) => (
+              <p key={idx} className="bg-gray-50/70 dark:bg-gray-800/40 p-5 rounded-2xl border border-gray-100 dark:border-gray-800">
+                {para}
+              </p>
+            ))}
+
+            {/* Education Box */}
+            {aboutContent.education && (
+              <div className="bg-blue-50/60 dark:bg-blue-950/30 p-5 rounded-2xl border border-blue-200/60 dark:border-blue-900/40 flex items-start gap-4">
+                <div className="p-3 rounded-xl bg-blue-600 text-white shadow-xs">
+                  <FaGraduationCap className="text-xl" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Education</div>
+                  <h4 className="font-bold text-gray-900 dark:text-white text-base">
+                    {aboutContent.education.degree} ({aboutContent.education.cgpa})
+                  </h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {aboutContent.education.institution} • <span className="font-medium">{aboutContent.education.period}</span>
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <a
+                href={RESUME_LINK}
+                download
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-sm hover:shadow transition-all duration-200"
+              >
+                <FaDownload className="text-xs" />
+                Download Resume
+              </a>
+
+              <div className="flex items-center gap-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target={social.href.startsWith("mailto:") ? undefined : "_blank"}
+                    rel={social.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                    className={`p-3 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 ${social.color} transition-all duration-200`}
+                    title={social.label}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="space-y-6 text-lg sm:text-xl text-gray-700 dark:text-gray-300">
-            {aboutContent.paragraphs.map((para, idx) => (
-              <motion.p
+          {/* Specialization Pillars */}
+          <div className="lg:col-span-6 grid sm:grid-cols-2 gap-4">
+            {aboutContent.pillars?.map((pillar, idx) => (
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
-                className="leading-relaxed"
+                className="p-5 rounded-2xl bg-gray-50 dark:bg-gray-800/70 border border-gray-200/80 dark:border-gray-700/80 hover:border-blue-400 dark:hover:border-blue-500 transition-all duration-200 space-y-2.5 shadow-sm"
               >
-                {para}
-              </motion.p>
+                <div className="p-2.5 rounded-xl bg-white dark:bg-gray-700 w-fit shadow-xs">
+                  {pillarIcons[idx % pillarIcons.length]}
+                </div>
+                <h3 className="font-bold text-gray-900 dark:text-white text-base">
+                  {pillar.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {pillar.description}
+                </p>
+              </div>
             ))}
           </div>
-
-          {/* Stats or highlights */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="grid grid-cols-3 gap-4 py-6"
-          >
-            <div className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
-              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{aboutContent.experienceCount}+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
-            </div>
-            <div className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400">{aboutContent.projectsCount}+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Projects Built</div>
-            </div>
-            <div className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg backdrop-blur-sm">
-              <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{aboutContent.technologyCount}+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Technologies</div>
-            </div>
-          </motion.div>
-
-          {/* Social links and CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 items-start sm:items-center"
-          >
-            <a
-              href={RESUME_LINK}
-              download
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              <FaDownload className="text-sm" />
-              Download Resume
-            </a>
-
-            <div className="flex gap-4 ml-4">
-              {socialLinks.map((social, idx) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith('mailto:') ? undefined : "_blank"}
-                  rel={social.href.startsWith('mailto:') ? undefined : "noopener noreferrer"}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: 0.9 + idx * 0.1 }}
-                  whileHover={{ scale: 1.2 }}
-                  className={`p-3 rounded-full bg-white dark:bg-gray-700 shadow-md ${social.color} transition-all duration-300 text-gray-600 dark:text-gray-300`}
-                  title={social.label}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 };
 
 export default About;
+
+

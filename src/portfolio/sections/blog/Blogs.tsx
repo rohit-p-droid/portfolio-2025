@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { BLOG_LINK } from "../../config/config";
 import { formatDate } from "../../../common/utils";
 import { blogsData as blogPosts } from "./blogsData";
-import { FaPenNib, FaCalendarAlt, FaClock, FaSearch, FaTimes, FaInbox } from "react-icons/fa";
+import { FaPenNib, FaCalendarAlt, FaClock, FaSearch, FaTimes, FaInbox, FaInfoCircle } from "react-icons/fa";
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 
@@ -121,10 +121,10 @@ const Blog = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className="group flex flex-col justify-between h-full bg-white/70 dark:bg-gray-900/40 backdrop-blur-md p-6 rounded-3xl border border-gray-200/80 dark:border-gray-800/60 hover:border-blue-500/50 dark:hover:border-blue-400/50 shadow-md hover:shadow-xl dark:shadow-none transition-all duration-300 relative overflow-hidden"
+                className="group flex flex-col justify-between h-full bg-white/70 dark:bg-gray-900/40 backdrop-blur-md p-6 rounded-3xl border border-gray-200/80 dark:border-gray-800/60 hover:border-blue-500/50 dark:hover:border-blue-400/50 shadow-md hover:shadow-xl dark:shadow-none transition-all duration-300 relative"
               >
                 {/* Decorative hover gradient glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 <div className="space-y-4 relative">
                   <div className="flex flex-wrap gap-1.5 text-[10px]">
@@ -151,9 +151,27 @@ const Blog = () => {
                     {post.title}
                   </h3>
                   
-                  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed">
-                    {post.description}
-                  </p>
+                  {/* Description container with hover tooltip */}
+                  <div className="relative group/desc">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed cursor-help">
+                      {post.description}
+                    </p>
+
+                    {/* Tooltip containing complete description */}
+                    <div className="invisible opacity-0 group-hover/desc:visible group-hover/desc:opacity-100 transition-all duration-200 ease-out absolute bottom-full left-0 right-0 mb-2.5 z-50 pointer-events-none">
+                      <div className="bg-gray-900/95 dark:bg-gray-800/98 backdrop-blur-md text-white text-xs leading-relaxed p-3.5 rounded-2xl border border-gray-700/80 dark:border-gray-600/80 shadow-2xl">
+                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-blue-400 dark:text-blue-300 mb-1.5 uppercase tracking-wider">
+                          <FaInfoCircle className="text-xs" />
+                          <span>Complete Description</span>
+                        </div>
+                        <p className="text-gray-200 dark:text-gray-200 text-xs leading-relaxed font-normal">
+                          {post.description}
+                        </p>
+                        {/* Tooltip Arrow */}
+                        <div className="absolute top-full left-6 -mt-1 border-4 border-transparent border-t-gray-900/95 dark:border-t-gray-800/98" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="mt-8 pt-4 border-t border-gray-100 dark:border-gray-800/60 flex flex-col justify-between relative gap-4">

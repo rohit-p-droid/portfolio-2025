@@ -4,13 +4,16 @@ import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ScrollToTop from '../components/ScrollToTop';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ThemeButton, ScrollToTopButton, FloatingMenu } from './components';
+import { ScrollToTopButton, Navbar } from './components';
 
 function App() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState<string>(() => {
+    return localStorage.getItem("portfolio_theme") || "light";
+  });
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("portfolio_theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -21,7 +24,7 @@ function App() {
     defaultOptions: {
       queries: {
         staleTime: 5 * 60 * 1000, // 5 minutes
-        gcTime: 10 * 60 * 1000, // 10 minutes (was cacheTime)
+        gcTime: 10 * 60 * 1000, // 10 minutes
         refetchOnWindowFocus: false,
         refetchOnMount: false,
         refetchOnReconnect: false,
@@ -31,17 +34,18 @@ function App() {
   });
 
   return (
-    <>
+    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white antialiased transition-colors duration-300 flex flex-col justify-between selection:bg-blue-500 selection:text-white">
       <QueryClientProvider client={queryClient}>
         <ScrollToTop />
-        <ThemeButton toggleTheme={toggleTheme} theme={theme} />
-        <FloatingMenu />
-        <Outlet />
+        <Navbar theme={theme} toggleTheme={toggleTheme} />
+        <div className="flex-grow">
+          <Outlet />
+        </div>
         <Footer />
         <ScrollToTopButton />
       </QueryClientProvider>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

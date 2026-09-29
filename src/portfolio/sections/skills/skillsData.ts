@@ -1,166 +1,65 @@
 export const skillsData = [
     {
-        category: "Frontend",
+        category: "AI & Generative AI",
+        description: "LLMs, Multi-Agent Systems, RAG, Voice AI & MCP",
         items: [
-            {
-                name: "React.js",
-                icon: "/assets/skills/react.svg"
-            },
-            {
-                name: "Next.js",
-                icon: "/assets/skills/nextjs.svg"
-            },
-            {
-                name: "Tailwind CSS",
-                icon: "/assets/skills/tailwindcss.svg"
-            }
+            { name: "LangGraph", icon: "/assets/skills/langgraph.svg" },
+            { name: "LangChain", icon: "/assets/skills/langchain.svg" },
+            { name: "OpenAI (GPT Live & Agents SDK)", icon: "/assets/skills/machinelearning.svg" },
+            { name: "MCP (Model Context Protocol)", icon: "/assets/skills/mcp.svg" },
+            { name: "Qdrant Vector DB", icon: "/assets/skills/qdrant.svg" },
+            { name: "Graph RAG & Hybrid Retrieval", icon: "/assets/skills/neo4j.svg" },
+            { name: "Prompt & Embeddings Engineering", icon: "/assets/skills/machinelearning.svg" }
         ]
     },
     {
-        category: "Backend",
+        category: "Backend & Microservices",
+        description: "High-throughput APIs, ORMs, gRPC & event-driven architecture",
         items: [
-            {
-                name: "Node.js",
-                icon: "/assets/skills/nodejs.svg"
-            },
-            {
-                name: "NestJS",
-                icon: "/assets/skills/nestjs.svg"
-            },
-            {
-                name: "Express.js",
-                icon: "/assets/skills/expressjs.svg"
-            },
-            {
-                name: "Laravel",
-                icon: "/assets/skills/laravel.svg"
-            },
-            {
-                name: "Django",
-                icon: "/assets/skills/django.svg"
-            },
-            {
-                name: "Spring Boot",
-                icon: "/assets/skills/springboot.svg"
-            },
-            {
-                name: "Flask",
-                icon: "/assets/skills/flask.svg"
-            }
+            { name: "Python", icon: "/assets/skills/python.svg" },
+            { name: "Django & DRF", icon: "/assets/skills/django.svg" },
+            { name: "FastAPI", icon: "/assets/skills/python.svg" },
+            { name: "NestJS", icon: "/assets/skills/nestjs.svg" },
+            { name: "Node.js", icon: "/assets/skills/nodejs.svg" },
+            { name: "gRPC & Microservices", icon: "/assets/skills/restapi.svg" },
+            { name: "REST APIs", icon: "/assets/skills/restapi.svg" },
+            { name: "RabbitMQ & Event-Driven", icon: "/assets/skills/rabbitmq.svg" }
         ]
     },
     {
-        category: "Database",
+        category: "Frontend & Full-Stack",
+        description: "React, Next.js, component architecture & TypeScript",
         items: [
-            {
-                name: "MongoDB",
-                icon: "/assets/skills/mongodb.svg"
-            },
-            {
-                name: "PostgreSQL",
-                icon: "/assets/skills/postgresql.svg"
-            },
-            {
-                name: "MySQL",
-                icon: "/assets/skills/mysql.svg"
-            },
-            {
-                name: "SQLite",
-                icon: "/assets/skills/sqlite.svg"
-            },
-            {
-                name: "Neo4j",
-                icon: "/assets/skills/neo4j.svg"
-            },
-            {
-                name: "Qdrant",
-                icon: "/assets/skills/qdrant.svg"
-            }
+            { name: "React.js", icon: "/assets/skills/react.svg" },
+            { name: "Next.js", icon: "/assets/skills/nextjs.svg" },
+            { name: "TypeScript", icon: "/assets/skills/typescript.svg" },
+            { name: "JavaScript", icon: "/assets/skills/javascript.svg" },
+            { name: "Tailwind CSS", icon: "/assets/skills/tailwindcss.svg" },
+            { name: "Hooks & Context API", icon: "/assets/skills/react.svg" }
         ]
     },
     {
-        category: "Programming Languages",
+        category: "Databases & Storage",
+        description: "SQL, NoSQL, Vector & Graph databases",
         items: [
-            {
-                name: "JavaScript",
-                icon: "/assets/skills/javascript.svg"
-            },
-            {
-                name: "TypeScript",
-                icon: "/assets/skills/typescript.svg"
-            },
-            {
-                name: "Python",
-                icon: "/assets/skills/python.svg"
-            },
-            {
-                name: "Java",
-                icon: "/assets/skills/java.svg"
-            },
-            {
-                name: "PHP",
-                icon: "/assets/skills/php.svg"
-            }
+            { name: "PostgreSQL", icon: "/assets/skills/postgresql.svg" },
+            { name: "MongoDB", icon: "/assets/skills/mongodb.svg" },
+            { name: "Qdrant", icon: "/assets/skills/qdrant.svg" },
+            { name: "Neo4j", icon: "/assets/skills/neo4j.svg" },
+            { name: "SQLite", icon: "/assets/skills/sqlite.svg" },
+            { name: "MySQL", icon: "/assets/skills/mysql.svg" }
         ]
     },
     {
-        category: "AI / ML",
+        category: "Cloud, DevOps & Engineering",
+        description: "Docker, Kubernetes, CI/CD, and system design",
         items: [
-            {
-                name: "Machine Learning",
-                icon: "/assets/skills/machinelearning.svg"
-            },
-            {
-                name: "LangChain",
-                icon: "/assets/skills/langchain.svg"
-            },
-            {
-                name: "LangGraph",
-                icon: "/assets/skills/langgraph.svg"
-            },
-            {
-                name: "MCP (Model Context Protocol)",
-                icon: "/assets/skills/mcp.svg"
-            }
-        ]
-    },
-    {
-        category: "Cybersecurity",
-        items: [
-            {
-                name: "OWASP Top 10",
-                icon: "/assets/skills/owasp.svg"
-            }
-        ]
-    },
-    {
-        category: "CI/CD",
-        items: [
-            {
-                name: "Docker",
-                icon: "/assets/skills/docker.svg"
-            },
-            {
-                name: "Kubernetes",
-                icon: "/assets/skills/kubernetes.svg"
-            },
-            {
-                name: "Jenkins",
-                icon: "/assets/skills/Jenkins.svg"
-            }
-        ]
-    },
-    {
-        category: "Other",
-        items: [
-            {
-                name: "REST API",
-                icon: "/assets/skills/restapi.svg"
-            },
-            {
-                name: "RabbitMQ",
-                icon: "/assets/skills/rabbitmq.svg"
-            }
+            { name: "Docker", icon: "/assets/skills/docker.svg" },
+            { name: "Kubernetes", icon: "/assets/skills/kubernetes.svg" },
+            { name: "Jenkins CI/CD", icon: "/assets/skills/Jenkins.svg" },
+            { name: "GitHub Actions & Vercel", icon: "/assets/skills/Jenkins.svg" },
+            { name: "System Design & SOLID", icon: "/assets/skills/restapi.svg" },
+            { name: "Zero-Downtime Releases", icon: "/assets/skills/docker.svg" }
         ]
     }
-]
+];
